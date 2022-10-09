@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace 'com.openrun.wantrunning.feature.home'
+    namespace 'com.openrun.wantrunning.feature.history'
     compileSdk 33
 
     buildFeatures {

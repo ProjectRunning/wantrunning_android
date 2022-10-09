@@ -5,6 +5,11 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 
+android {
+    namespace 'com.openrun.wantrunning.core.network'
+    compileSdk 33
+}
+
 dependencies {
     implementation(project(":core:model"))
 

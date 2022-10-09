@@ -29,12 +29,19 @@ android {
         targetCompatibility JavaVersion.VERSION_11
     }
 
+    buildFeatures {
+        viewBinding true
+    }
+
     namespace 'com.openrun.wantrunning'
 }
 
 dependencies {
-    implementation(project(":feature:landing"))
     implementation(project(":feature:home"))
+    implementation(project(":feature:running"))
+    implementation(project(":feature:history"))
+    implementation(project(":feature:profile"))
+
     implementation(project(":core:data"))
 
     implementation 'androidx.core:core-ktx:1.9.0'

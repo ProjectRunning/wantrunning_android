@@ -3,6 +3,11 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+android {
+    namespace 'com.openrun.wantrunning.core.test'
+    compileSdk 33
+}
+
 dependencies {
 
 }
