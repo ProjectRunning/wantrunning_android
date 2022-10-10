@@ -4,6 +4,12 @@
     package="com.openrun.wantrunning">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".WantRunningApplication"
@@ -16,6 +22,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Wantrunning"
         tools:targetApi="31">
+
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="jcrj5ddm4g" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -25,6 +36,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".service.LocationUpdateService"
+            android:foregroundServiceType="location"
+            android:enabled="true"
+            android:exported="true">
+        <!-- Any inner elements would go here. -->
+         </service>
     </application>
+
+
 
 </manifest>

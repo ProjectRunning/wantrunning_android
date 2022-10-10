@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@+id/home">
+
+    <fragment
+        android:id="@+id/home"
+        android:name="com.openrun.wantrunning.ui.home.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_home_to_running"
+            app:destination="@id/running" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/running"
+        android:name="com.openrun.wantrunning.ui.running.RunningFragment"
+        android:label="Running"
+        tools:layout="@layout/fragment_running">
+        <action
+            android:id="@+id/action_running_to_home"
+            app:destination="@id/home" />
+    </fragment>
+
+
+</navigation>
