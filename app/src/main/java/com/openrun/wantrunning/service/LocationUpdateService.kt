@@ -5,10 +5,7 @@ import android.annotation.SuppressLint
 import android.app.*
 import android.content.Intent
 import android.location.Location
-import android.os.Build
-import android.os.Bundle
-import android.os.IBinder
-import android.os.Looper
+import android.os.*
 import android.util.Log
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.android.gms.location.*
@@ -20,9 +17,18 @@ import com.openrun.wantrunning.MainActivity
  * each new location result.
  */
 class LocationUpdateService : Service() {
+    private val binder = LocalBinder()
     private var mFusedLocationClient: FusedLocationProviderClient? = null
     private var locationRequest: LocationRequest? = null
     private val locationSettingsRequest: LocationSettingsRequest? = null
+
+    inner class LocalBinder : Binder() {
+        fun getService(): LocationUpdateService = this@LocationUpdateService
+    }
+
+    override fun onBind(intent: Intent): IBinder {
+        return binder
+    }
 
     //endregion
     //onCreate
@@ -58,14 +64,17 @@ class LocationUpdateService : Service() {
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         prepareForegroundNotification()
-        startLocationUpdates()
         return START_STICKY
     }
 
     @SuppressLint("MissingPermission")
-    private fun startLocationUpdates() {
+    fun startLocationUpdates(locationCallback: LocationCallback) {
         mFusedLocationClient!!.requestLocationUpdates(locationRequest!!,
             locationCallback, Looper.myLooper())
+    }
+
+    fun stopLocationUpdates(locationCallback: LocationCallback) {
+        mFusedLocationClient!!.removeLocationUpdates(locationCallback)
     }
 
     private fun prepareForegroundNotification() {
@@ -98,10 +107,6 @@ class LocationUpdateService : Service() {
             // Notification ID cannot be 0.
             startForeground(1, notification)
         }
-    }
-
-    override fun onBind(intent: Intent): IBinder? {
-        return null
     }
 
     private fun initData() {
