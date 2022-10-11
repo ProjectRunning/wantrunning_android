@@ -7,4 +7,8 @@
     <include app:graph="@navigation/home_navigation" />
 
     <include app:graph="@navigation/running_navigation" />
+
+    <include app:graph="@navigation/history_navigation" />
+
+    <include app:graph="@navigation/profile_navigation" />
 </navigation>

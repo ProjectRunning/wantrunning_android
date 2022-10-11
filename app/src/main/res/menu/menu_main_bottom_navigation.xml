@@ -14,15 +14,15 @@
         android:title="@string/nav_running_title"
         app:showAsAction="ifRoom" />
 
-    <!--    <item-->
-    <!--        android:id="@+id/main_bottom_navigation_history"-->
-    <!--        android:icon="@drawable/ic_baseline_leaderboard_24"-->
-    <!--        android:title="@string/nav_history_title"-->
-    <!--        app:showAsAction="ifRoom" />-->
+    <item
+        android:id="@+id/history_nav_graph"
+        android:icon="@drawable/ic_baseline_leaderboard_24"
+        android:title="@string/nav_history_title"
+        app:showAsAction="ifRoom" />
 
-    <!--    <item-->
-    <!--        android:id="@+id/main_bottom_navigation_profile"-->
-    <!--        android:icon="@drawable/ic_baseline_person_24"-->
-    <!--        android:title="@string/nav_profile_title"-->
-    <!--        app:showAsAction="ifRoom" />-->
+    <item
+        android:id="@+id/profile_nav_graph"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="@string/nav_profile_title"
+        app:showAsAction="ifRoom" />
 </menu>

@@ -13,16 +13,20 @@
         android:layout_height="0dp"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toTopOf="@id/main_bottom_navigation_view"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/nav_main" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:background="@drawable/background_shadow_bottom"
+        app:layout_constraintBottom_toTopOf="@id/main_bottom_navigation_view" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/main_bottom_navigation_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:elevation="16dp"
+        android:layout_height="@dimen/bottom_navigation_view_height"
+        app:elevation="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/menu_main_bottom_navigation" />
 </androidx.constraintlayout.widget.ConstraintLayout>
