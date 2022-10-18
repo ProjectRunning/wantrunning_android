@@ -37,6 +37,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":feature:landing"))
     implementation(project(":feature:home"))
     implementation(project(":feature:running"))
     implementation(project(":feature:history"))
