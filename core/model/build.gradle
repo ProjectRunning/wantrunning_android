@@ -1,0 +1,13 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'com.openrun.wantrunning.core.model'
+    compileSdk 33
+}
+
+dependencies {
+    implementation("com.squareup.moshi:moshi:1.13.0")
+}
