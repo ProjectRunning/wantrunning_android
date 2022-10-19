@@ -43,6 +43,6 @@ class MainActivity : AppCompatActivity(),
         navController = navHostFragment.navController
         navController.addOnDestinationChangedListener(this)
 
-        binding.bnvMainNav.setupWithNavController(navController)
+//        binding.bnvMainNav.setupWithNavController(navController)
     }
 }
