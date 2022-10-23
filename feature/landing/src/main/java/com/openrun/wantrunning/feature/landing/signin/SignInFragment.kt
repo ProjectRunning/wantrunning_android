@@ -7,20 +7,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.result.registerForActivityResult
 import androidx.fragment.app.Fragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.kakao.sdk.user.UserApi
 import com.kakao.sdk.user.UserApiClient
 import com.openrun.wantrunning.feature.landing.databinding.FragmentSignInBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SignInFragment : Fragment() {
 
     private var _binding: FragmentSignInBinding? = null
     private val binding: FragmentSignInBinding get() = _binding!!
+
+    @Inject
+    lateinit var signInButtonClick: SignInButtonClick
 
     private val googleSignInRequestLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -41,7 +43,7 @@ class SignInFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnSignInKakao.setOnClickListener {
-            signInWithKakao()
+            signInButtonClick.kakaoSignIn()
         }
 
         binding.btnSignInGoogle.setOnClickListener {
