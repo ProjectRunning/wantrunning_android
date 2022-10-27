@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_greeting">님 안녕하세요!\n오늘도 함께 달릴 준비 되었나요?</string>
+    <string name="home_weather_unknown">광진구 광장동 27C \n최저/최고</string>
+    <string name="home_search_hint">원하는 러닝파티를 찾아보세요!</string>
+
+    <string name="list_item_title_unknown">어린이 대공원 같이 뛰실 분</string>
+    <string name="list_item_location_unknown">서울시 광진구 능동로 216</string>
+    <string name="list_item_time_unknown">09/30 (금) PM 7:00 예정</string>
+    <string name="list_item_participating">3/4 참여 중</string>
+
+    <string name="expected">예정</string>
+    <string name="participating">참여 중</string>
+    <string name="get_involved">참여하기</string>
+</resources>
