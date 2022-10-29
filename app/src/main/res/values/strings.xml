@@ -5,4 +5,7 @@
     <string name="nav_running_title">러닝</string>
     <string name="nav_history_title">기록</string>
     <string name="nav_profile_title">마이페이지</string>
+
+    <string name="kakao_oauth_scheme">kakao$eebfb71f9702b1234600974d9968ed62</string>
+    <string name="kakao_native_app_key">eebfb71f9702b1234600974d9968ed62</string>
 </resources>
