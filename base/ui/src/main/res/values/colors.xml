@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary_1">#FF8000</color>
+    <color name="primary_2">#FFA710</color>
+    <color name="primary_3">#FFC018</color>
+    <color name="primary_8">#FFEDCF</color>
+
+    <color name="grayscale_20">#C2C5D6</color>
+    <color name="grayscale_30">#A3A8C2</color>
+    <color name="grayscale_70">#3D425C</color>
+
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>
