@@ -11,4 +11,11 @@
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="container_kakao">#FEE500</color>
+    <color name="symbol_kakao">#000000</color>
+    <color name="label_kakao">#D9000000</color>
+
+    <color name="container_google">#FFFFFF</color>
+    <color name="label_google">#D9000000</color>
 </resources>
