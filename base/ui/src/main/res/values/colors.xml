@@ -5,12 +5,17 @@
     <color name="primary_3">#FFC018</color>
     <color name="primary_8">#FFEDCF</color>
 
+    <color name="grayscale_1">#F6F6F9</color>
+    <color name="grayscale_5">#F0F0F5</color>
     <color name="grayscale_20">#C2C5D6</color>
     <color name="grayscale_30">#A3A8C2</color>
     <color name="grayscale_70">#3D425C</color>
+    <color name="grayscale_90">#14161F</color>
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="active_red">#FF4E18</color>
 
     <color name="container_kakao">#FEE500</color>
     <color name="symbol_kakao">#000000</color>

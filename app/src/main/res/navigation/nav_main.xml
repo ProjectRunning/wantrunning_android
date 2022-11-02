@@ -20,5 +20,15 @@
         android:id="@+id/mainFeatureFragment"
         android:name="com.openrun.wantrunning.MainFeatureFragment"
         android:label="MainFeatureFragment"
-        tools:layout="@layout/fragment_main_feature" />
+        tools:layout="@layout/fragment_main_feature">
+        <action
+            android:id="@+id/action_mainFeatureFragment_to_makeRunningPartyFragment"
+            app:destination="@id/makeRunningPartyFragment"
+            app:enterAnim="@android:anim/slide_in_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/makeRunningPartyFragment"
+        android:name="com.openrun.wantrunning.party.make.MakeRunningPartyFragment"
+        android:label="MakeRunningPartyFragment"
+        tools:layout="@layout/fragment_make_running_party" />
 </navigation>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="make_running_party_submit">파티 생성하기</string>
+    <string name="make_running_party_title">파티제목</string>
+    <string name="make_running_party_title_hint">파티 제목을 적어주세요</string>
+    <string name="make_running_party_region">지역</string>
+    <string name="make_running_party_region_hint">지역을 선택해주세요.</string>
+    <string name="make_running_party_datetime">파티 일정</string>
+    <string name="make_running_party_date_hint">날짜 선택</string>
+    <string name="make_running_party_time_hint">시간 선택</string>
+    <string name="make_running_party_personnel">참여 인원</string>
+    <string name="make_running_party_level">러닝 수준</string>
+</resources>

@@ -15,6 +15,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.openrun.wantrunning.feature.home.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -23,6 +24,9 @@ class HomeFragment : Fragment() {
     private val binding: FragmentHomeBinding get() = _binding!!
     private lateinit var demoCollectionAdapter: DemoCollectionAdapter
     private lateinit var viewPager: ViewPager2
+
+    @Inject
+    lateinit var homeNavigator: HomeNavigator
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -47,6 +51,10 @@ class HomeFragment : Fragment() {
                 }
             }
         }.attach()
+
+        binding.fabHomeMakeRunningParty.setOnClickListener {
+            homeNavigator.navigateToMakeRunningParty()
+        }
     }
 }
 
