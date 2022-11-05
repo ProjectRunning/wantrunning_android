@@ -16,4 +16,13 @@
         <item name="errorEnabled">true</item>
         <item name="hintEnabled">false</item>
     </style>
+
+    <!-- Buttons -->
+    <style name="Widget.WantRunning.CompoundButton.BoxedRadioButton" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:button">@null</item>
+        <item name="android:background">@drawable/btn_boxed_radio</item>
+        <item name="android:textColor">@color/color_btn_boxed_radio_text</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">center</item>
+    </style>
 </resources>
