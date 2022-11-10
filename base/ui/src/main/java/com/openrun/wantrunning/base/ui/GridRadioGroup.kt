@@ -19,7 +19,8 @@ class GridRadioGroup @JvmOverloads constructor(
     attrs: AttributeSet? = null
 ) : GridLayout(context, attrs) {
 
-    private var mCheckedId: Int = -1
+    private var _checkedId: Int = -1
+    val checkedId: Int get() = _checkedId
 
     /* For Mutex Lock */
     private var mProtectFromCheckedChange: Boolean = false
@@ -42,11 +43,11 @@ class GridRadioGroup @JvmOverloads constructor(
     override fun onFinishInflate() {
         super.onFinishInflate()
 
-        if (mCheckedId != -1) {
+        if (_checkedId != -1) {
             mProtectFromCheckedChange = true
-            setCheckedStateForView(mCheckedId, true)
+            setCheckedStateForView(_checkedId, true)
             mProtectFromCheckedChange = false
-            setCheckedId(mCheckedId)
+            setCheckedId(_checkedId)
         }
     }
 
@@ -54,8 +55,8 @@ class GridRadioGroup @JvmOverloads constructor(
         if (child is AppCompatRadioButton) {
             if (child.isChecked) {
                 mProtectFromCheckedChange = true
-                if (mCheckedId != -1) {
-                    setCheckedStateForView(mCheckedId, false)
+                if (_checkedId != -1) {
+                    setCheckedStateForView(_checkedId, false)
                 }
                 mProtectFromCheckedChange = false
                 setCheckedId(child.id)
@@ -64,11 +65,11 @@ class GridRadioGroup @JvmOverloads constructor(
         super.addView(child, index, params)
     }
 
-    fun check(id: Int) {
-        if (id != -1 && id == mCheckedId) return
+    private fun check(id: Int) {
+        if (id != -1 && id == _checkedId) return
 
-        if (mCheckedId != -1) {
-            setCheckedStateForView(mCheckedId, false)
+        if (_checkedId != -1) {
+            setCheckedStateForView(_checkedId, false)
         }
 
         if (id != -1) {
@@ -79,21 +80,13 @@ class GridRadioGroup @JvmOverloads constructor(
     }
 
     private fun setCheckedId(id: Int) {
-        mCheckedId = id
-        mOnCheckedChangeListener?.onCheckedChanged(this, mCheckedId)
+        _checkedId = id
+        mOnCheckedChangeListener?.onCheckedChanged(this, _checkedId)
     }
 
     private fun setCheckedStateForView(viewId: Int, checked: Boolean) {
         val checkedView = findViewById<AppCompatRadioButton>(viewId) ?: return
         checkedView.isChecked = checked
-    }
-
-    fun getCheckedCheckableImageButtonId(): Int {
-        return mCheckedId
-    }
-
-    fun clearCheck() {
-        check(-1)
     }
 
     fun setOnCheckedChangeListener(listener: OnCheckedChangeListener) {
@@ -120,8 +113,8 @@ class GridRadioGroup @JvmOverloads constructor(
 
             mProtectFromCheckedChange = true
 
-            if (mCheckedId != -1) {
-                setCheckedStateForView(mCheckedId, false)
+            if (_checkedId != -1) {
+                setCheckedStateForView(_checkedId, false)
             }
 
             mProtectFromCheckedChange = false

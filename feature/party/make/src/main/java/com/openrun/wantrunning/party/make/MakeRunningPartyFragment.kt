@@ -22,5 +22,28 @@ class MakeRunningPartyFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initRegionField()
+        initDatetimeField()
+        initPersonnelField()
+
+        binding.btnMakeRunningPartyComplete.setOnClickListener {
+            onCompleteButtonClick()
+        }
+    }
+
+    private fun initRegionField() {
+
+    }
+
+    private fun initDatetimeField() {
+
+    }
+
+    private fun initPersonnelField() {
+
+    }
+
+    private fun onCompleteButtonClick() {
+
     }
 }
