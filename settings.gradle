@@ -10,6 +10,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url 'https://naver.jfrog.io/artifactory/maven/'
+        }
         maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/'}
     }
 }
@@ -25,3 +28,4 @@ include ':feature:running'
 include ':feature:history'
 include ':feature:profile'
 include ':feature:landing'
+include ':base:ui'

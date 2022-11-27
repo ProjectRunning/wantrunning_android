@@ -11,11 +11,15 @@ android {
 
     buildFeatures {
         viewBinding true
+        dataBinding true
+    }
+
+    dataBinding {
+        enabled = true
     }
 }
 
 dependencies {
-
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation("androidx.activity:activity-ktx:1.6.0")
@@ -26,6 +30,17 @@ dependencies {
     implementation 'com.google.android.material:material:1.6.1'
     implementation("com.google.dagger:hilt-android:2.42")
     kapt("com.google.dagger:hilt-compiler:2.42")
+
+    implementation 'androidx.navigation:navigation-fragment:2.5.1'
+
+    // google location service
+    implementation 'com.google.android.gms:play-services-location:20.0.0'
+
+    // naver
+    implementation 'com.naver.maps:map-sdk:3.16.0'
+    implementation('com.naver.maps:map-sdk:3.16.0') {
+        exclude group: 'com.android.support'
+    }
 
     // navigation
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.2")
