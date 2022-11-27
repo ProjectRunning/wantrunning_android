@@ -66,6 +66,12 @@ dependencies {
     implementation("com.google.android.gms:play-services-location:21.0.0")
     implementation("com.google.android.gms:play-services-auth:20.3.0")
 
+    // naver
+    implementation 'com.naver.maps:map-sdk:3.16.0'
+    implementation('com.naver.maps:map-sdk:3.16.0') {
+        exclude group: 'com.android.support'
+    }
+
     // firebase
     implementation platform("com.google.firebase:firebase-bom:30.4.1")
     implementation("com.google.firebase:firebase-analytics-ktx")
