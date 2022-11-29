@@ -9,6 +9,10 @@ android {
     namespace 'com.openrun.wantrunning.feature.home'
     compileSdk 33
 
+    defaultConfig {
+        minSdk 24
+    }
+
     buildFeatures {
         viewBinding true
         dataBinding true

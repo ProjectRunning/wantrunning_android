@@ -15,10 +15,24 @@
             app:destination="@id/mainFeatureFragment"
             app:popUpTo="@id/landingNavHostFragment"
             app:popUpToInclusive="true" />
+
     </fragment>
+
     <fragment
         android:id="@+id/mainFeatureFragment"
         android:name="com.openrun.wantrunning.MainFeatureFragment"
         android:label="MainFeatureFragment"
-        tools:layout="@layout/fragment_main_feature" />
+        tools:layout="@layout/fragment_main_feature" >
+        <action
+                android:id="@+id/action_mainFeatureFragment_to_partyDetailFragment"
+                app:destination="@id/partyDetailFragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/partyDetailFragment"
+        android:name="com.openrun.wantrunning.feature.home.PartyDetailFragment"
+        android:label="PartyDetailFragment"
+        tools:layout="@layout/fragment_party_detail"/>
+
 </navigation>
