@@ -9,6 +9,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,10 +23,10 @@ fun BasicTextField(
     errorMessage: String = "",
     enabled: Boolean = true,
     readOnly: Boolean = false,
-    isError: Boolean = false,
     singleLine: Boolean = true,
     keyboardType: KeyboardType = KeyboardType.Text,
     imeAction: ImeAction = ImeAction.Default,
+    textStyle: TextStyle = MaterialTheme.typography.body2,
     onValueChange: (String) -> Unit
 ) {
     Column(
@@ -45,7 +46,7 @@ fun BasicTextField(
             },
             enabled = enabled,
             readOnly = readOnly,
-            isError = isError,
+            isError = errorMessage.isNotBlank(),
             keyboardOptions = KeyboardOptions(
                 keyboardType = keyboardType,
                 imeAction = imeAction
@@ -61,12 +62,13 @@ fun BasicTextField(
                     MaterialTheme.colors.primary
                 },
                 unfocusedIndicatorColor = Color.Transparent,
-                disabledIndicatorColor = Color.Transparent
+                disabledIndicatorColor = Color.Transparent,
+                errorIndicatorColor = Color.Transparent
             ),
-            textStyle = MaterialTheme.typography.body2
+            textStyle = textStyle
         )
 
-        if (isError) {
+        if (errorMessage.isNotBlank()) {
             TextFieldErrorText(errorMessage = errorMessage)
         }
     }
@@ -93,7 +95,6 @@ private fun BasicTextFieldPreview() {
                 value = "",
                 hint = "텍스트를 입력해주세요.",
                 errorMessage = "에러 메세지입니다.",
-                isError = true,
                 onValueChange = {}
             )
         }
