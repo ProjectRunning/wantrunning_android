@@ -7,20 +7,20 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.openrun.wantrunning.base.ui.compose.WantRunningTheme
-import com.openrun.wantrunning.party.make.databinding.FragmentMakeRunningPartyBinding
+import com.openrun.wantrunning.party.make.databinding.FragmentMakePartyEssentialBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MakeRunningPartyFragment : Fragment() {
+class MakePartyEssentialFragment : Fragment() {
 
-    private var _binding: FragmentMakeRunningPartyBinding? = null
-    private val binding: FragmentMakeRunningPartyBinding get() = _binding!!
+    private var _binding: FragmentMakePartyEssentialBinding? = null
+    private val binding: FragmentMakePartyEssentialBinding get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentMakeRunningPartyBinding.inflate(inflater, container, false)
-        binding.composeMakeRunningParty.setContent {
+        _binding = FragmentMakePartyEssentialBinding.inflate(inflater, container, false)
+        binding.composeMakePartyEssential.setContent {
             WantRunningTheme {
-                MakeRunningPartyScreen()
+                MakePartyEssentialScreen()
             }
         }
         return binding.root
@@ -29,7 +29,7 @@ class MakeRunningPartyFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.tbMakeRunningParty.setNavigationOnClickListener {
+        binding.tbMakePartyEssential.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
     }

@@ -19,7 +19,7 @@ import com.openrun.wantrunning.base.ui.R
 import com.openrun.wantrunning.base.ui.compose.*
 
 @Composable
-fun MakeRunningPartyScreen(
+fun MakePartyEssentialScreen(
     modifier: Modifier = Modifier
 ) {
     val scrollState = rememberScrollState()
@@ -34,7 +34,7 @@ fun MakeRunningPartyScreen(
         ) {
             var title by rememberSaveable { mutableStateOf("") }
             var titleErrorMessage by rememberSaveable { mutableStateOf("") }
-            MakeRunningPartyTitleContent(
+            MakePartyTitleContent(
                 title = title,
                 errorMessage = titleErrorMessage,
                 onTitleChange = {
@@ -44,7 +44,7 @@ fun MakeRunningPartyScreen(
 
             var address by rememberSaveable { mutableStateOf("") }
             var addressErrorMessage by rememberSaveable { mutableStateOf("") }
-            MakeRunningPartyRegionContent(
+            MakePartyRegionContent(
                 address = address,
                 errorMessage = addressErrorMessage
             ) {
@@ -54,7 +54,7 @@ fun MakeRunningPartyScreen(
             var date by rememberSaveable { mutableStateOf("") }
             var time by rememberSaveable { mutableStateOf("") }
             var dateTimeErrorMessage by rememberSaveable { mutableStateOf("") }
-            MakeRunningPartyDatetimeContent(
+            MakePartyDatetimeContent(
                 date = date,
                 time = time,
                 errorMessage = dateTimeErrorMessage
@@ -63,7 +63,7 @@ fun MakeRunningPartyScreen(
             }
 
             var personnel by rememberSaveable { mutableStateOf(2) }
-            MakeRunningPartyPersonnelContent(
+            MakePartyPersonnelContent(
                 personnel = personnel,
                 onMinusButtonClick = { /*TODO*/ },
                 onPlusButtonClick = {}
@@ -71,7 +71,7 @@ fun MakeRunningPartyScreen(
 
             var url by rememberSaveable { mutableStateOf("") }
             var urlErrorMessage by rememberSaveable { mutableStateOf("") }
-            MakeRunningPartyOpenChattingContent(
+            MakePartyOpenChattingContent(
                 url = url,
                 onUrlChange = {},
                 urlErrorMessage = urlErrorMessage
@@ -93,7 +93,7 @@ fun MakeRunningPartyScreen(
 }
 
 @Composable
-private fun MakeRunningPartyTitleContent(
+private fun MakePartyTitleContent(
     modifier: Modifier = Modifier,
     title: String,
     errorMessage: String,
@@ -119,7 +119,7 @@ private fun MakeRunningPartyTitleContent(
 }
 
 @Composable
-private fun MakeRunningPartyRegionContent(
+private fun MakePartyRegionContent(
     modifier: Modifier = Modifier,
     address: String,
     errorMessage: String,
@@ -155,7 +155,7 @@ private fun MakeRunningPartyRegionContent(
 }
 
 @Composable
-private fun MakeRunningPartyDatetimeContent(
+private fun MakePartyDatetimeContent(
     modifier: Modifier = Modifier,
     date: String,
     time: String,
@@ -204,7 +204,7 @@ private fun MakeRunningPartyDatetimeContent(
 }
 
 @Composable
-private fun MakeRunningPartyPersonnelContent(
+private fun MakePartyPersonnelContent(
     modifier: Modifier = Modifier,
     personnel: Int,
     onMinusButtonClick: () -> Unit,
@@ -258,7 +258,7 @@ private fun MakeRunningPartyPersonnelContent(
 }
 
 @Composable
-private fun MakeRunningPartyOpenChattingContent(
+private fun MakePartyOpenChattingContent(
     modifier: Modifier = Modifier,
     url: String,
     onUrlChange: (url: String) -> Unit,
@@ -295,9 +295,9 @@ private fun MakeRunningPartyOpenChattingContent(
 
 @Preview(showBackground = true, backgroundColor = 0xFFFFFFFF, widthDp = 360)
 @Composable
-private fun MakeRunningPartyTitleContentPreview() {
+private fun MakePartyTitleContentPreview() {
     WantRunningTheme {
-        MakeRunningPartyTitleContent(
+        MakePartyTitleContent(
             title = "",
             errorMessage = "",
             onTitleChange = {}
@@ -307,9 +307,9 @@ private fun MakeRunningPartyTitleContentPreview() {
 
 @Preview(showBackground = true, backgroundColor = 0xFFFFFFFF, widthDp = 360)
 @Composable
-private fun MakeRunningPartyRegionContentPreview() {
+private fun MakePartyRegionContentPreview() {
     WantRunningTheme {
-        MakeRunningPartyRegionContent(
+        MakePartyRegionContent(
             address = "서울특별시 마포구 양화로 160 홍대입구역",
             errorMessage = "",
             onRegionButtonClick = {}
@@ -319,9 +319,9 @@ private fun MakeRunningPartyRegionContentPreview() {
 
 @Preview(showBackground = true, backgroundColor = 0xFFFFFFFF, widthDp = 360)
 @Composable
-private fun MakeRunningPartyDateTimeContentPreview() {
+private fun MakePartyDateTimeContentPreview() {
     WantRunningTheme {
-        MakeRunningPartyDatetimeContent(
+        MakePartyDatetimeContent(
             date = "12월 3일 토요일",
             time = "오후 6:00",
             errorMessage = "날짜 및 시간을 입력해주세요.",
@@ -332,9 +332,9 @@ private fun MakeRunningPartyDateTimeContentPreview() {
 
 @Preview(showBackground = true, backgroundColor = 0xFFFFFFFF, widthDp = 360)
 @Composable
-private fun MakeRunningPartyPersonnelContentPreview() {
+private fun MakePartyPersonnelContentPreview() {
     WantRunningTheme {
-        MakeRunningPartyPersonnelContent(
+        MakePartyPersonnelContent(
             personnel = 3,
             onMinusButtonClick = {},
             onPlusButtonClick = {}
@@ -344,9 +344,9 @@ private fun MakeRunningPartyPersonnelContentPreview() {
 
 @Preview(showBackground = true, backgroundColor = 0xFFFFFFFF, widthDp = 360)
 @Composable
-private fun MakeRunningPartyOpenChattingContentPreview() {
+private fun MakePartyOpenChattingContentPreview() {
     WantRunningTheme {
-        MakeRunningPartyOpenChattingContent(
+        MakePartyOpenChattingContent(
             url = "",
             onUrlChange = {
 
