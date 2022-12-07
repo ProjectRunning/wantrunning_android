@@ -14,7 +14,7 @@
 
     <string name="make_party_personnel">참여 인원</string>
 
-    <string name="make_party_level">러닝 수준</string>
+    <string name="make_party_level">난이도</string>
     <string name="make_party_level_easy">초심자</string>
     <string name="make_party_level_normal">중수</string>
     <string name="make_party_level_hard">고수</string>

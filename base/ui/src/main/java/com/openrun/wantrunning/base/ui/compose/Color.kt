@@ -10,7 +10,7 @@ val Primary4 = Color(0xFFFFD920)
 val Primary5 = Color(0xFFFFD387)
 val Primary6 = Color(0xFFFFDF8B)
 val Primary7 = Color(0xFFFFEC8F)
-val Primary8 = Color(0xFFDDEFCF)
+val Primary8 = Color(0xFFFFF1D9)
 val Primary9 = Color(0xFFFFF7D2)
 
 val Secondary1 = Color(0xFF182881)
