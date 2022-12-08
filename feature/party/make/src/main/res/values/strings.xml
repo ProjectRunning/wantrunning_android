@@ -1,32 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="make_running_party_submit">파티 생성하기</string>
+    <string name="make_party_submit">파티 생성하기</string>
 
     <string name="make_party_title">파티제목</string>
     <string name="make_party_title_hint">파티 제목을 적어주세요</string>
-
     <string name="make_party_region">지역</string>
     <string name="make_party_region_hint">지역을 선택해주세요.</string>
-
     <string name="make_party_datetime">파티 일정</string>
-    <string name="make_party_date_hint">날짜 선택</string>
-    <string name="make_party_time_hint">시간 선택</string>
-
-    <string name="make_party_personnel">참여 인원</string>
-
+    <string name="make_party_personnel">참여인원</string>
     <string name="make_party_level">난이도</string>
-    <string name="make_party_level_easy">초심자</string>
-    <string name="make_party_level_normal">중수</string>
-    <string name="make_party_level_hard">고수</string>
-
-    <string name="make_party_face">내 페이스 (1km 당)</string>
-    <string name="make_party_face_under_4">4분 이하</string>
-    <string name="make_party_face_over_4_under_5">4~5분</string>
-    <string name="make_party_face_over_6_under_7">6~7분</string>
-    <string name="make_party_face_over_7_under_9">7~9분</string>
-    <string name="make_party_face_over_9">9분 이상</string>
-    <string name="make_party_face_unknown">잘 몰라요</string>
-
+    <string name="make_party_pace">페이스 (1km 당)</string>
+    <string name="make_party_time_taken">예상 소요시간</string>
+    <string name="make_party_time_taken_hint">예상 소요시간을 선택해주세요.</string>
     <string name="make_party_introduce">소개문구</string>
     <string name="make_party_introduce_hint">파티 모집에 필요한 다양한 정보를 적어주세요.\n자세히 기재할 수록 참여율이 높아질 수 있어요!
     \n\n예시) 초보도 환영합니다. 4km 정도 뛸 예정이에요.</string>

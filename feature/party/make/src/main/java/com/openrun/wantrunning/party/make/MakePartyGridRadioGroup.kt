@@ -2,6 +2,9 @@ package com.openrun.wantrunning.party.make
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
@@ -41,45 +44,25 @@ private fun MakePartyRadioButton(
 }
 
 @Composable
-private fun MakePartyRadioButtonRow(
-    modifier: Modifier = Modifier,
-    rowItems: List<String>,
-    selectedItem: String,
-    onItemSelected: (item: String) -> Unit
-) {
-    Row(
-        modifier = modifier,
-        horizontalArrangement = Arrangement.spacedBy(space = 8.dp)
-    ) {
-        rowItems.forEach { rowItem ->
-            MakePartyRadioButton(
-                item = rowItem,
-                selected = rowItem == selectedItem,
-                onSelected = {
-                    onItemSelected.invoke(rowItem)
-                }
-            )
-        }
-    }
-}
-
-@Composable
 fun MakePartyGridRadioGroup(
     modifier: Modifier = Modifier,
     items: List<String>,
     selectedItem: String = "",
-    rowSpan: Int = 3,
+    columnSpan: Int = 3,
     onItemSelected: (item: String) -> Unit
 ) {
-    Column(
+    LazyVerticalGrid(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(space = 8.dp)
+        columns = GridCells.Fixed(count = columnSpan),
+        horizontalArrangement = Arrangement.spacedBy(space = 8.dp),
+        verticalArrangement = Arrangement.spacedBy(space = 8.dp),
+        userScrollEnabled = false
     ) {
-        items.chunked(size = rowSpan).forEach { chunkedList ->
-            MakePartyRadioButtonRow(
-                rowItems = chunkedList,
-                selectedItem = selectedItem,
-                onItemSelected = onItemSelected
+        items(items) { item ->
+            MakePartyRadioButton(
+                item = item,
+                selected = item == selectedItem,
+                onSelected = { onItemSelected.invoke(item) }
             )
         }
     }
@@ -93,18 +76,6 @@ private fun MakePartyRadioButtonPreview() {
             item = "RadioButton",
             selected = true,
             onSelected = {}
-        )
-    }
-}
-
-@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
-@Composable
-private fun MakePartyRadioButtonRowPreview() {
-    WantRunningTheme {
-        MakePartyRadioButtonRow(
-            rowItems = listOf("radio1", "radio2", "radio3"),
-            selectedItem = "radio1",
-            onItemSelected = {}
         )
     }
 }
