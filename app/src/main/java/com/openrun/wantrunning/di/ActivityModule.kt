@@ -1,5 +1,6 @@
 package com.openrun.wantrunning.di
 
+import com.openrun.wantrunning.feature.home.PartyListAdapter
 import com.openrun.wantrunning.feature.home.HomeNavigator
 import com.openrun.wantrunning.feature.landing.signin.SignInButtonClick
 import dagger.Binds
@@ -16,4 +17,9 @@ abstract class ActivityModule {
 
     @Binds
     abstract fun provideHomeNavigator(homeNavigator: HomeNavigatorImpl): HomeNavigator
+
+    @Binds
+    abstract fun providePartyListItemClick(
+        onPartyListItemClickListener: OnPartyListItemClickListenerImpl
+    ): PartyListAdapter.OnPartyListItemClickListener
 }

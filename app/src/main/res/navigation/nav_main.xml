@@ -25,10 +25,18 @@
             android:id="@+id/action_mainFeatureFragment_to_makeRunningPartyFragment"
             app:destination="@id/makeRunningPartyFragment"
             app:enterAnim="@android:anim/slide_in_left" />
+        <action
+            android:id="@+id/action_mainFeatureFragment_to_partyDetailFragment"
+            app:destination="@id/partyDetailFragment"/>
     </fragment>
     <fragment
         android:id="@+id/makeRunningPartyFragment"
         android:name="com.openrun.wantrunning.party.make.essential.MakePartyEssentialFragment"
         android:label="MakeRunningPartyFragment"
         tools:layout="@layout/fragment_make_party_essential" />
+    <fragment
+        android:id="@+id/partyDetailFragment"
+        android:name="com.openrun.wantrunning.feature.home.PartyDetailFragment"
+        android:label="PartyDetailFragment"
+        tools:layout="@layout/fragment_party_detail"/>
 </navigation>
