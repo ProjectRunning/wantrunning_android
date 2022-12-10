@@ -47,7 +47,7 @@ private fun MakePartyRadioButton(
 fun MakePartyGridRadioGroup(
     modifier: Modifier = Modifier,
     items: List<String>,
-    selectedItem: String = "",
+    selectedItem: String?,
     columnSpan: Int = 3,
     onItemSelected: (item: String) -> Unit
 ) {
@@ -86,7 +86,7 @@ private fun MakePartyGridRadioGroupPreview() {
     WantRunningTheme {
         MakePartyGridRadioGroup(
             items = List(size = 8) { "Radio $it" },
-            selectedItem = "Radio 4",
+            selectedItem = null,
             onItemSelected = {}
         )
     }

@@ -21,9 +21,7 @@ fun TextFieldTitleText(
     title: String,
     isEssentialField: Boolean = false
 ) {
-    Row(
-        modifier = modifier
-    ) {
+    Row(modifier = modifier) {
         Text(
             text = title,
             style = MaterialTheme.typography.body2.copy(fontWeight = FontWeight.Bold)
@@ -46,7 +44,8 @@ fun TextFieldErrorText(
 ) {
     Row(
         modifier = modifier,
-        horizontalArrangement = Arrangement.spacedBy(space = 4.dp)
+        horizontalArrangement = Arrangement.spacedBy(space = 4.dp),
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
             painter = painterResource(id = R.drawable.ic_error_20),
@@ -54,9 +53,7 @@ fun TextFieldErrorText(
         )
 
         Text(
-            modifier = Modifier
-                .weight(1f)
-                .align(Alignment.CenterVertically),
+            modifier = Modifier.weight(1f),
             text = errorMessage,
             color = MaterialTheme.colors.error,
             style = MaterialTheme.typography.body1

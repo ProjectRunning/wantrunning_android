@@ -2,10 +2,12 @@ package com.openrun.wantrunning.base.ui.compose
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Text
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -16,11 +18,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun BasicTextField(
+fun BoxedTextField(
     modifier: Modifier = Modifier,
     value: String,
-    hint: String,
-    errorMessage: String = "",
+    hint: String = "",
     enabled: Boolean = true,
     readOnly: Boolean = false,
     singleLine: Boolean = true,
@@ -29,49 +30,39 @@ fun BasicTextField(
     textStyle: TextStyle = MaterialTheme.typography.body2,
     onValueChange: (String) -> Unit
 ) {
-    Column(
+    OutlinedTextField(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(space = 6.dp)
-    ) {
-        OutlinedTextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = value,
-            onValueChange = onValueChange,
-            placeholder = {
-                Text(
-                    text = hint,
-                    color = Gray20,
-                    style = MaterialTheme.typography.body2
-                )
+        value = value,
+        onValueChange = onValueChange,
+        placeholder = {
+            Text(
+                text = hint,
+                color = Gray20,
+                style = MaterialTheme.typography.body2
+            )
+        },
+        enabled = enabled,
+        readOnly = readOnly,
+        keyboardOptions = KeyboardOptions(
+            keyboardType = keyboardType,
+            imeAction = imeAction
+        ),
+        singleLine = singleLine,
+        shape = RoundedCornerShape(size = 8.dp),
+        colors = TextFieldDefaults.textFieldColors(
+            textColor = Gray100,
+            backgroundColor = Gray1,
+            focusedIndicatorColor = if (readOnly) {
+                Color.Transparent
+            } else {
+                MaterialTheme.colors.primary
             },
-            enabled = enabled,
-            readOnly = readOnly,
-            isError = errorMessage.isNotBlank(),
-            keyboardOptions = KeyboardOptions(
-                keyboardType = keyboardType,
-                imeAction = imeAction
-            ),
-            singleLine = singleLine,
-            shape = RoundedCornerShape(size = 8.dp),
-            colors = TextFieldDefaults.textFieldColors(
-                textColor = Gray100,
-                backgroundColor = Gray1,
-                focusedIndicatorColor = if (readOnly) {
-                    Color.Transparent
-                } else {
-                    MaterialTheme.colors.primary
-                },
-                unfocusedIndicatorColor = Color.Transparent,
-                disabledIndicatorColor = Color.Transparent,
-                errorIndicatorColor = Color.Transparent
-            ),
-            textStyle = textStyle
-        )
-
-        if (errorMessage.isNotBlank()) {
-            TextFieldErrorText(errorMessage = errorMessage)
-        }
-    }
+            unfocusedIndicatorColor = Color.Transparent,
+            disabledIndicatorColor = Color.Transparent,
+            errorIndicatorColor = Color.Transparent
+        ),
+        textStyle = textStyle
+    )
 }
 
 @Preview(showBackground = true, backgroundColor = 0xFFFFFFFF, widthDp = 360)
@@ -79,22 +70,14 @@ fun BasicTextField(
 private fun BasicTextFieldPreview() {
     WantRunningTheme {
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            BasicTextField(
+            BoxedTextField(
                 value = "",
                 hint = "텍스트를 입력해주세요.",
                 onValueChange = {}
             )
 
-            BasicTextField(
+            BoxedTextField(
                 value = "텍스트를 입력했습니다.",
-                hint = "",
-                onValueChange = {}
-            )
-
-            BasicTextField(
-                value = "",
-                hint = "텍스트를 입력해주세요.",
-                errorMessage = "에러 메세지입니다.",
                 onValueChange = {}
             )
         }

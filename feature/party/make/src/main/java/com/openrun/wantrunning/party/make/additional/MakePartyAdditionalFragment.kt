@@ -1,4 +1,4 @@
-package com.openrun.wantrunning.party.make
+package com.openrun.wantrunning.party.make.additional
 
 import android.os.Bundle
 import android.view.LayoutInflater

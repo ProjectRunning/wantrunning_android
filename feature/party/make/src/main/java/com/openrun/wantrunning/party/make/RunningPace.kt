@@ -10,5 +10,8 @@ enum class RunningPace(val displayedValue: String) {
 
     companion object {
         fun displayedValues(): List<String> = values().map { it.displayedValue }
+
+        fun findValueByDisplayedValue(displayedValue: String): RunningPace? =
+            RunningPace.values().find { it.displayedValue == displayedValue }
     }
 }

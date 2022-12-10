@@ -6,8 +6,9 @@ enum class RunningLevel(val displayedValue: String) {
     ADVANCED("고수");
 
     companion object {
-        fun displayedValues(): List<String> {
-            return values().map { it.displayedValue }
-        }
+        fun displayedValues(): List<String> = values().map { it.displayedValue }
+
+        fun findValueByDisplayedValue(displayedValue: String): RunningLevel? =
+            values().find { it.displayedValue == displayedValue }
     }
 }

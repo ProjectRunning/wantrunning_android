@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/makeRunningPartyFragment"
-        android:name="com.openrun.wantrunning.party.make.MakePartyEssentialFragment"
+        android:name="com.openrun.wantrunning.party.make.essential.MakePartyEssentialFragment"
         android:label="MakeRunningPartyFragment"
         tools:layout="@layout/fragment_make_party_essential" />
 </navigation>
