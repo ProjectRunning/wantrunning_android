@@ -1,6 +1,9 @@
 package com.openrun.wantrunning.di
 
+import android.view.View
 import com.openrun.wantrunning.feature.home.PartyListAdapter
+import com.openrun.wantrunning.feature.home.HomeNavigator
+import com.openrun.wantrunning.feature.home.PartyDetailFragment
 import com.openrun.wantrunning.feature.landing.signin.SignInButtonClick
 import dagger.Binds
 import dagger.Module
@@ -20,4 +23,9 @@ abstract class ActivityModule {
     abstract fun providePartyListItemClick(
         onPartyListItemClickListener: OnPartyListItemClickListenerImpl
     ): PartyListAdapter.OnPartyListItemClickListener
+
+    @Binds
+    abstract fun providePartyMemberHeaderClick(
+        onPartyMemberHeaderClickListener: OnPartyMemberHeaderClickListenerImpl
+    ): PartyDetailFragment.OnPartyMemberHeaderClickListener
 }

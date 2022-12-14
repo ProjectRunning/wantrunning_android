@@ -5,13 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class PartyListAdapter : RecyclerView.Adapter<PartyListAdapter.ViewHolder>(){
+class VerticalPartyMemberAdapter : RecyclerView.Adapter<VerticalPartyMemberAdapter.ViewHolder>() {
 
-    interface OnPartyListItemClickListener {
-        fun onPartyListItemClick(item: Any)
+    interface OnPartyMemberItemClickListener {
+        fun onPartyMemberItemClick(item: Any)
     }
 
-    private var onClickListener : OnPartyListItemClickListener? = null
+    private var onClickListener : VerticalPartyMemberAdapter.OnPartyMemberItemClickListener? = null
 
     var data =  listOf<Any>()
         set(value) {
@@ -19,30 +19,30 @@ class PartyListAdapter : RecyclerView.Adapter<PartyListAdapter.ViewHolder>(){
             notifyDataSetChanged()
         }
 
-    fun setOnPartyListItemClickListener(listener: OnPartyListItemClickListener) {
+    fun setOnPartyMemberItemClickListener(listener: OnPartyMemberItemClickListener) {
         onClickListener = listener
     }
 
     override fun getItemCount() = data.size
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: VerticalPartyMemberAdapter.ViewHolder, position: Int) {
         val item = data[position]
         onClickListener?.let { listener ->
             holder.bind(item, listener)
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VerticalPartyMemberAdapter.ViewHolder {
 
-        return ViewHolder.from(parent)
+        return VerticalPartyMemberAdapter.ViewHolder.from(parent)
     }
 
     class ViewHolder private constructor(itemView: View) : RecyclerView.ViewHolder(itemView){
 
-        fun bind(item: Any, onPartyListItemClickListener: OnPartyListItemClickListener) {
+        fun bind(item: Any, onPartyMemberItemClickListener: VerticalPartyMemberAdapter.OnPartyMemberItemClickListener) {
             itemView.isClickable = true
             itemView.setOnClickListener {
-                onPartyListItemClickListener.onPartyListItemClick(item)
+                onPartyMemberItemClickListener.onPartyMemberItemClick(item)
             }
         }
 
@@ -50,7 +50,7 @@ class PartyListAdapter : RecyclerView.Adapter<PartyListAdapter.ViewHolder>(){
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val view = layoutInflater
-                    .inflate(R.layout.list_item_running_party, parent, false)
+                    .inflate(R.layout.list_item_party_member_vertical, parent, false)
 
                 return ViewHolder(view)
             }
