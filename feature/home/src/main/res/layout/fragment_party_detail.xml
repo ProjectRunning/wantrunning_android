@@ -307,16 +307,21 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="16dp">
+                        android:paddingTop="16dp"
+                        android:paddingBottom="16dp">
 
                     <LinearLayout
+                            android:id="@+id/ll_party_member_header"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
                             android:orientation="horizontal"
                             android:weightSum="1">
 
                         <TextView
+                                android:id="@+id/tv_party_member_header"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="@string/party_member"
@@ -361,16 +366,31 @@
 
                     </LinearLayout>
 
-                    <LinearLayout
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="8dp">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_party_member"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="8dp"
+                            android:paddingEnd="8dp"
+                            android:clipToPadding="false"/>
+
+                        <LinearLayout
+                            android:id="@+id/ll_dummy"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:layout_marginBottom="8dp"
                             android:gravity="center"
+                            android:orientation="vertical"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:visibility="invisible">
 
-                            android:orientation="vertical">
-
-                        <de.hdodenhof.circleimageview.CircleImageView
+                            <de.hdodenhof.circleimageview.CircleImageView
                                 android:id="@+id/civ_party_member"
                                 android:layout_width="48dp"
                                 android:layout_height="48dp"
@@ -378,7 +398,7 @@
                                 app:civ_border_color="@color/color_FFFFFF"
                                 app:civ_border_width="0dp" />
 
-                        <TextView
+                            <TextView
                                 android:id="@+id/tv_member_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -389,7 +409,9 @@
                                 />
 
 
-                    </LinearLayout>
+                        </LinearLayout>
+
+                    </FrameLayout>
 
                 </LinearLayout>
 

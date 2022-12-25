@@ -33,6 +33,16 @@
         android:id="@+id/partyDetailFragment"
         android:name="com.openrun.wantrunning.feature.home.PartyDetailFragment"
         android:label="PartyDetailFragment"
-        tools:layout="@layout/fragment_party_detail"/>
+        tools:layout="@layout/fragment_party_detail">
+        <action
+            android:id="@+id/action_partyDetailFragment_to_partyMemberFragment"
+            app:destination="@id/partyMemberFragment"/>
 
+    </fragment>
+    <fragment
+        android:id="@+id/partyMemberFragment"
+        android:name="com.openrun.wantrunning.feature.home.PartyMemberFragment"
+        android:label="PartyMemberFragment"
+        tools:layout="@layout/fragment_party_member"
+        />
 </navigation>
