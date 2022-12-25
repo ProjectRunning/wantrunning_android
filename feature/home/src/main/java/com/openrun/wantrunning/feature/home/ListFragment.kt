@@ -34,7 +34,7 @@ class ListFragment: Fragment() {
 
         binding.rvList.adapter = adapter
 
-        adapter.data = listOf(0, 1, 2, 3, 4, 5, 6, 7);
+        adapter.data = listOf(0, 1, 2, 3, 4, 5, 6, 7)
 
         binding.rvList.layoutManager = LinearLayoutManager(context)
 
