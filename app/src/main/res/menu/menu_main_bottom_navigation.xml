@@ -3,26 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/home_nav_graph"
-        android:icon="@drawable/ic_lightning_24dp"
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_lightning_24"
         android:title="@string/nav_home_title"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/running_nav_graph"
-        android:icon="@drawable/ic_shoes_24dp"
+        android:id="@+id/nav_running"
+        android:icon="@drawable/ic_shoes_24"
         android:title="@string/nav_running_title"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/history_nav_graph"
-        android:icon="@drawable/ic_leaderboard_24dp"
+        android:id="@+id/nav_history"
+        android:icon="@drawable/ic_leaderboard_24"
         android:title="@string/nav_history_title"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/profile_nav_graph"
-        android:icon="@drawable/ic_person_24dp"
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/ic_person_24"
         android:title="@string/nav_profile_title"
         app:showAsAction="ifRoom" />
 </menu>

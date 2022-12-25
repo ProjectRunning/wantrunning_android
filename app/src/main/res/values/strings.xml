@@ -1,6 +1,66 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">wantrunning</string>
 
     <string name="kakao_oauth_scheme">kakao$eebfb71f9702b1234600974d9968ed62</string>
     <string name="kakao_native_app_key">eebfb71f9702b1234600974d9968ed62</string>
+
+    <string name="nav_home_title">번개파티</string>
+    <string name="nav_running_title">러닝</string>
+    <string name="nav_history_title">기록</string>
+    <string name="nav_profile_title">마이페이지</string>
+
+    <string name="all_edit">수정하기</string>
+    <string name="all_go_to_next">다음으로</string>
+    <string name="all_skip">건너뛰기</string>
+    <string name="all_done">완료하기</string>
+
+    <!-- home module -->
+    <string name="home_greeting">님 안녕하세요!\n오늘도 함께 달릴 준비 되었나요?</string>
+    <string name="home_location_unknown">광진구 광장동</string>
+    <string name="home_temperature_unknown">27°C</string>
+    <string name="home_search_hint">원하는 러닝파티를 찾아보세요!</string>
+    <string name="list_item_title_unknown">어린이 대공원 같이 뛰실 분</string>
+    <string name="list_item_location_unknown">서울시 광진구 능동로 216</string>
+    <string name="list_item_time_unknown">09/30 (금) PM 7:00 예정</string>
+    <string name="list_item_participating" tools:ignore="TypographyFractions">3/4 참여 중</string>
+    <string name="expected">예정</string>
+    <string name="participating">참여 중</string>
+    <string name="get_involved">참여하기</string>
+    <string name="party_detail">파티 상세</string>
+    <string name="home">홈</string>
+    <string name="share">공유</string>
+    <string name="party_title_unknown">광란의 러닝 파티원 구함</string>
+    <string name="party_description_unknown">경의선 책거리에서 4km 정도 가볍게 러닝하실 분 모집합니다. 가좌역에서 같이 출발해요!</string>
+    <string name="party_location_unknown">서울특별시 마포구 양화로 160 홍대입구역</string>
+    <string name="party_time_unknown">09/30 (금) 오후 4:00 예정</string>
+    <string name="difficulty">난이도</string>
+    <string name="difficulty_newbie">초심자</string>
+    <string name="pace">페이스</string>
+    <string name="pace_unknown">7~9분</string>
+    <string name="time_required">소요시간</string>
+    <string name="time_required_unknown">01:00</string>
+    <string name="party_owner">러닝 파티 개설자</string>
+    <string name="member_name_unknown">치타</string>
+    <string name="member_description_blank">한줄 소개란이 비어있는 유저입니다.</string>
+    <string name="party_member">참여 중인 파티원</string>
+    <string name="join_party">파티 참여하기</string>
+
+    <!-- party make module -->
+    <string name="make_party_submit">파티 생성하기</string>
+    <string name="make_party_title">파티 제목</string>
+    <string name="make_party_title_hint">파티 제목을 적어주세요.</string>
+    <string name="make_party_region">지역</string>
+    <string name="make_party_region_hint">지역을 선택해주세요.</string>
+    <string name="make_party_datetime">파티 일정</string>
+    <string name="make_party_date_hint">날짜 입력</string>
+    <string name="make_party_time_hint">시간 입력</string>
+    <string name="make_party_personnel">참여인원</string>
+    <string name="make_party_open_chat">오픈채팅방 링크</string>
+    <string name="make_party_level">난이도</string>
+    <string name="make_party_pace">페이스 (1km 당)</string>
+    <string name="make_party_time_taken">예상 소요시간</string>
+    <string name="make_party_time_taken_hint">예상 소요시간</string>
+    <string name="make_party_introduce">소개문구</string>
+    <string name="make_party_introduce_hint">파티 모집에 필요한 다양한 정보를 적어주세요.\n자세히 기재할 수록 참여율이 높아질 수 있어요!
+    \n\n예시) 초보도 환영합니다. 4km 정도 뛸 예정이에요.</string>
 </resources>

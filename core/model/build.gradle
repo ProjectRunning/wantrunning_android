@@ -9,5 +9,5 @@ android {
 }
 
 dependencies {
-    implementation("com.squareup.moshi:moshi:1.13.0")
+    implementation('com.squareup.moshi:moshi:1.14.0')
 }
