@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_home"
+    app:startDestination="@id/mainHomeFragment">
+
+    <fragment
+        android:id="@+id/mainHomeFragment"
+        android:name="com.openrun.wantrunning.home.MainHomeFragment"
+        android:label="MainHomeFragment"
+        tools:layout="@layout/fragment_main_home">
+        <action
+            android:id="@+id/action_mainHomeFragment_to_makePartyEssentialFragment"
+            app:destination="@id/makePartyEssentialFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/makePartyEssentialFragment"
+        android:name="com.openrun.wantrunning.party.make.essential.MakePartyEssentialFragment"
+        android:label="MakePartyEssentialFragment"
+        tools:layout="@layout/fragment_make_party_essential" />
+</navigation>

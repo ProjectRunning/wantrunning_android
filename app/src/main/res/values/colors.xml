@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary_1">#FFFF8000</color>
+    <color name="primary_2">#FFFFA710</color>
+    <color name="primary_3">#FFFFC018</color>
+    <color name="primary_4">#FFFFD920</color>
+    <color name="primary_5">#FFFFD387</color>
+    <color name="primary_6">#FFFFDF8B</color>
+    <color name="primary_7">#FFFFEC8F</color>
+    <color name="primary_8">#FFFFF1D9</color>
+    <color name="primary_9">#FFFFF7D2</color>
+
+    <color name="secondary_1">#FF182881</color>
+    <color name="secondary_2">#FF2239B8</color>
+    <color name="secondary_3">#FF1C5BD8</color>
+    <color name="secondary_4">#FF146DEA</color>
+    <color name="secondary_5">#FF0080FF</color>
+    <color name="secondary_6">#FF909CDC</color>
+    <color name="secondary_7">#FF89B6F5</color>
+    <color name="secondary_8">#FFB3D9FF</color>
+    <color name="secondary_9">#FFE5F2FF</color>
+
+    <color name="gray_100">#FF0A0B0F</color>
+    <color name="gray_90">#FF14161F</color>
+    <color name="gray_80">#FF292C3D</color>
+    <color name="gray_70">#FF3D425C</color>
+    <color name="gray_60">#FF52587A</color>
+    <color name="gray_50">#FF666E99</color>
+    <color name="gray_40">#FF858BAD</color>
+    <color name="gray_30">#FFA3A8C2</color>
+    <color name="gray_20">#FFC2C5D6</color>
+    <color name="gray_10">#FFE0E2EB</color>
+    <color name="gray_5">#FFF0F0F5</color>
+    <color name="gray_1">#FFF6F6F9</color>
+    <color name="gray_0">#FFFFFFFF</color>
+
+    <color name="active_red">#FFFF4900</color>
+    <color name="active_green">#FF00ED00</color>
+
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="container_kakao">#FEE500</color>
+    <color name="symbol_kakao">#000000</color>
+    <color name="label_kakao">#D9000000</color>
+
+    <color name="container_google">#FFFFFF</color>
+    <color name="label_google">#D9000000</color>
+</resources>

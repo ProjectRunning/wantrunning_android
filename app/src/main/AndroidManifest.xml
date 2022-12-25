@@ -37,10 +37,11 @@
         </activity>
 
         <service
-            android:name=".feature.running.service.LocationUpdateService"
+            android:name=".running.service.LocationUpdateService"
             android:enabled="true"
             android:exported="true"
-            android:foregroundServiceType="location">
+            android:foregroundServiceType="location"
+            tools:ignore="ExportedService">
             <!-- Any inner elements would go here. -->
         </service>
 
