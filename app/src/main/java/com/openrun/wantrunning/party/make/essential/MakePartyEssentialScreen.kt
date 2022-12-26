@@ -30,8 +30,7 @@ fun MakePartyEssentialScreen(
     val titleErrorMessage by rememberSaveable { mutableStateOf("") }
     val address by rememberSaveable { mutableStateOf("") }
     val addressErrorMessage by rememberSaveable { mutableStateOf("") }
-    val date by rememberSaveable { mutableStateOf("") }
-    val time by rememberSaveable { mutableStateOf("") }
+    val dateTime by rememberSaveable { mutableStateOf("") }
     val dateTimeErrorMessage by rememberSaveable { mutableStateOf("") }
     val personnel by rememberSaveable { mutableStateOf(2) }
     var url by rememberSaveable { mutableStateOf("") }
@@ -60,8 +59,7 @@ fun MakePartyEssentialScreen(
             )
 
             MakePartyDatetimeContent(
-                date = date,
-                time = time,
+                dateTime = dateTime,
                 errorMessage = dateTimeErrorMessage,
                 onDateTimeButtonClick = {}
             )
