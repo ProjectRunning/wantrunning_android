@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.openrun.wantrunning.R
 import com.openrun.wantrunning.databinding.FragmentPartyPlaceSearchBinding
 
@@ -32,6 +33,8 @@ class PartyPlaceSearchFragment : Fragment(), PartySearchRecommendAdapter.PartySe
             activity?.findNavController(R.id.fcv_main_nav_host)?.popBackStack()
         }
 
+        binding.rvPartySearchRecommend.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -42,7 +45,7 @@ class PartyPlaceSearchFragment : Fragment(), PartySearchRecommendAdapter.PartySe
 
         binding.rvPartySearchRecommend.adapter = adapter
 
-        adapter.setList(listOf(0, 1, 2, 3, 4, 5, 6, 7))
+        adapter.submitList(listOf(0, 1, 2, 3, 4, 5, 6, 7))
     }
 
     override fun onPartySearchRecommendItemClick(item: Any) {

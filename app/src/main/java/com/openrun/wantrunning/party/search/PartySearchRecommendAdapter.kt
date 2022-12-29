@@ -1,17 +1,20 @@
 package com.openrun.wantrunning.party.search
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.openrun.wantrunning.R
+import com.openrun.wantrunning.databinding.ItemPartySearchRecommendBinding
 
-class PartySearchRecommendAdapter : RecyclerView.Adapter<PartySearchRecommendAdapter.ViewHolder>(){
+class PartySearchRecommendAdapter:ListAdapter<Any, PartySearchRecommendAdapter.ViewHolder>(diffUtil){
 
-    private var data: List<Any> = ArrayList()
     val checked = ArrayList<Any>()
 
     interface PartySearchRecommendItemClickListener {
@@ -21,21 +24,12 @@ class PartySearchRecommendAdapter : RecyclerView.Adapter<PartySearchRecommendAda
 
     private var onClickListener : PartySearchRecommendItemClickListener? = null
 
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun setList(list: List<Any>) {
-        data = list
-        notifyDataSetChanged()
-    }
-
     fun setPartySearchRecommendItemClickListener(listener: PartySearchRecommendItemClickListener) {
         onClickListener = listener
     }
 
-    override fun getItemCount() = data.size
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = data[position]
+        val item = getItem(position)
 
         onClickListener?.let { listener ->
             holder.bind(item, listener)
@@ -51,6 +45,7 @@ class PartySearchRecommendAdapter : RecyclerView.Adapter<PartySearchRecommendAda
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val binding = ItemPartySearchRecommendBinding.bind(itemView)
 
         fun bind(item: Any, onPartyListItemClickListener: PartySearchRecommendItemClickListener) {
 
@@ -58,18 +53,30 @@ class PartySearchRecommendAdapter : RecyclerView.Adapter<PartySearchRecommendAda
             itemView.setOnClickListener {
                 onPartyListItemClickListener.onPartySearchRecommendItemClick(item)
             }
-            val starView = itemView.findViewById<FrameLayout>(R.id.fl_star)
-            starView.setOnClickListener {
+            binding.flStar.setOnClickListener {
                 onPartyListItemClickListener.onStarClick(item)
                 if(checked.contains(item)) {
                     checked.remove(item)
-                    it.findViewById<ImageView>(R.id.iv_star).visibility = View.INVISIBLE
-                    it.findViewById<ImageView>(R.id.iv_unstar).visibility = View.VISIBLE
+                    binding.ivStar.visibility = View.INVISIBLE
+                    binding.ivUnstar.visibility = View.VISIBLE
                 } else {
                     checked.add(item)
-                    it.findViewById<ImageView>(R.id.iv_unstar).visibility = View.INVISIBLE
-                    it.findViewById<ImageView>(R.id.iv_star).visibility = View.VISIBLE
+                    binding.ivStar.visibility = View.VISIBLE
+                    binding.ivUnstar.visibility = View.INVISIBLE
                 }
+            }
+        }
+    }
+
+    companion object {
+        val diffUtil = object: DiffUtil.ItemCallback<Any>() {
+            override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean {
+                return oldItem == newItem
+            }
+
+            @SuppressLint("DiffUtilEquals")
+            override fun areContentsTheSame(oldItem: Any, newItem: Any): Boolean {
+                return oldItem == newItem
             }
         }
     }
