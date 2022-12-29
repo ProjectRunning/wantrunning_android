@@ -186,21 +186,20 @@
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintVertical_bias="0" />
 
-                            <EditText
-                                android:id="@+id/et_search"
+                            <TextView
+                                android:id="@+id/tv_search"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:layout_marginStart="20dp"
                                 android:layout_marginEnd="20dp"
+                                android:gravity="center_vertical"
                                 android:background="@android:color/transparent"
                                 android:fontFamily="@font/pretendard_variable"
-                                android:hint="@string/home_search_hint"
-                                android:imeOptions="actionSearch"
+                                android:text="@string/home_search_hint"
                                 android:importantForAutofill="no"
-                                android:inputType="text"
                                 android:paddingStart="20dp"
                                 android:paddingEnd="20dp"
-                                android:textColorHint="#a3a8c2"
+                                android:textColorHint="@color/gray_20"
                                 android:textSize="13sp"
                                 android:textStyle="bold"
                                 app:layout_constraintBottom_toBottomOf="parent"

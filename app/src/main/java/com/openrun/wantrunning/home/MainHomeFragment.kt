@@ -43,6 +43,10 @@ class MainHomeFragment : Fragment() {
             }
         }.attach()
 
+        binding.tvSearch.setOnClickListener {
+            findNavController().navigate(R.id.action_mainHomeFragment_to_partyPlaceSearchFragment)
+        }
+
         binding.fabHomeMakeRunningParty.setOnClickListener {
             findNavController().navigate(R.id.action_mainHomeFragment_to_makePartyEssentialFragment)
         }

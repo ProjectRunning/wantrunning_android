@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.openrun.wantrunning.R
 import com.openrun.wantrunning.databinding.FragmentMainHomeListBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,7 +24,7 @@ class MainHomeListFragment : Fragment() {
         adapter.setOnPartyListItemClickListener(
             object : MainHomePartyListAdapter.OnPartyListItemClickListener {
                 override fun onPartyListItemClick(item: Any) {
-                    // TODO: navigate to detail
+                    activity?.findNavController(R.id.fcv_main_nav_host)?.navigate(R.id.action_mainHomeFragment_to_partyDetailFragment)
                 }
             }
         )

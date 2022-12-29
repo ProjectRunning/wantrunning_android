@@ -17,10 +17,39 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_mainHomeFragment_to_partyDetailFragment"
+            app:destination="@id/partyDetailFragment"/>
+        <action
+            android:id="@+id/action_mainHomeFragment_to_partyPlaceSearchFragment"
+            app:destination="@id/partyPlaceSearchFragment" />
     </fragment>
     <fragment
         android:id="@+id/makePartyEssentialFragment"
         android:name="com.openrun.wantrunning.party.make.essential.MakePartyEssentialFragment"
         android:label="MakePartyEssentialFragment"
         tools:layout="@layout/fragment_make_party_essential" />
+
+    <fragment
+        android:id="@+id/partyDetailFragment"
+        android:name="com.openrun.wantrunning.party.detail.PartyDetailFragment"
+        android:label="PartyDetailFragment"
+        tools:layout="@layout/fragment_party_detail">
+        <action
+            android:id="@+id/action_partyDetailFragment_to_partyMemberFragment"
+            app:destination="@id/partyMemberFragment"/>
+
+    </fragment>
+    <fragment
+        android:id="@+id/partyMemberFragment"
+        android:name="com.openrun.wantrunning.party.detail.PartyMemberFragment"
+        android:label="PartyMemberFragment"
+        tools:layout="@layout/fragment_party_member"
+        />
+
+    <fragment
+        android:id="@+id/partyPlaceSearchFragment"
+        android:name="com.openrun.wantrunning.party.search.PartyPlaceSearchFragment"
+        android:label="PartyPlaceSearchFragment"
+        tools:layout="@layout/fragment_party_place_search"/>
 </navigation>

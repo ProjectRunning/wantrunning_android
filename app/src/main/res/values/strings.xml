@@ -43,6 +43,11 @@
     <string name="member_name_unknown">치타</string>
     <string name="member_description_blank">한줄 소개란이 비어있는 유저입니다.</string>
     <string name="party_member">참여 중인 파티원</string>
+    <string name="party_place_search">파티 장소 검색</string>
+    <string name="set_location_here">현재 위치로 위치 설정</string>
+    <string name="place_unknown">서울특별시 마포구 양화로 188 홍대입구역</string>
+    <string name="place_detail">동교동 190-1 홍대입구역</string>
+    <string name="party_place_search_hint"><font size="14">지번, 도로명, 건물명으로 검색</font></string>
     <string name="join_party">파티 참여하기</string>
 
     <!-- party make module -->
@@ -63,4 +68,6 @@
     <string name="make_party_introduce">소개문구</string>
     <string name="make_party_introduce_hint">파티 모집에 필요한 다양한 정보를 적어주세요.\n자세히 기재할 수록 참여율이 높아질 수 있어요!
     \n\n예시) 초보도 환영합니다. 4km 정도 뛸 예정이에요.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
