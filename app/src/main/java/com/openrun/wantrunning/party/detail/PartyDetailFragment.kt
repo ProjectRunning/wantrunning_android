@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.openrun.wantrunning.R
 import com.openrun.wantrunning.databinding.FragmentPartyDetailBinding
@@ -28,20 +29,19 @@ class PartyDetailFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        val menuHost: MenuHost = requireActivity()
-//
-//        menuHost.addMenuProvider(object : MenuProvider {
-//            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-//                // Add menu items here
-//                menuInflater.inflate(R.menu.menu_toolbar, menu)
-//            }
-//
-//            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-//                // Handle the menu selection
-//                return true
-//            }
-//        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+        initToolBar()
+        initAdapter()
 
+        binding.rvPartyMember.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+        binding.llPartyMemberHeader.setOnClickListener {
+            activity?.findNavController(R.id.fcv_main_nav_host)?.navigate(R.id.action_partyDetailFragment_to_partyMemberFragment)
+        }
+
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun initToolBar() {
         binding.toolbar.inflateMenu(R.menu.menu_party_detail_toolbar)
 
         binding.toolbar.setOnMenuItemClickListener(Toolbar.OnMenuItemClickListener {
@@ -56,18 +56,16 @@ class PartyDetailFragment : Fragment() {
             }
         })
 
+        binding.toolbar.setNavigationOnClickListener {
+            activity?.findNavController(R.id.fcv_main_nav_host)?.popBackStack()
+        }
+    }
+
+    private fun initAdapter() {
         val adapter = PartyMemberAdapter()
 
         binding.rvPartyMember.adapter = adapter
 
         adapter.data = listOf(0, 1, 2, 3, 4, 5, 6, 7)
-
-        binding.rvPartyMember.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-
-        binding.llPartyMemberHeader.setOnClickListener {
-            // TODO: navigate to detail
-        }
-
-        super.onViewCreated(view, savedInstanceState)
     }
 }
