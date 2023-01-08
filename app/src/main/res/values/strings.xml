@@ -51,6 +51,7 @@
     <string name="join_party">파티 참여하기</string>
 
     <!-- party make module -->
+    <string name="make_party_toolbar_title">파티 생성</string>
     <string name="make_party_submit">파티 생성하기</string>
     <string name="make_party_title">파티 제목</string>
     <string name="make_party_title_hint">파티 제목을 적어주세요.</string>
