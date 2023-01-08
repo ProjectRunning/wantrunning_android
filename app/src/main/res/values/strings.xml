@@ -70,4 +70,8 @@
     \n\n예시) 초보도 환영합니다. 4km 정도 뛸 예정이에요.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <!-- search address -->
+    <string name="address_search_title">지역 설정</string>
 </resources>
