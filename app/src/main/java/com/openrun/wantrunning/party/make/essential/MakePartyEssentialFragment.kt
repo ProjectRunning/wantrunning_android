@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.openrun.wantrunning.R
 import com.openrun.wantrunning.ui.WantRunningTheme
 import com.openrun.wantrunning.databinding.FragmentMakePartyEssentialBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,7 +21,9 @@ class MakePartyEssentialFragment : Fragment() {
         _binding = FragmentMakePartyEssentialBinding.inflate(inflater, container, false)
         binding.composeMakePartyEssential.setContent {
             WantRunningTheme {
-                MakePartyEssentialScreen()
+                MakePartyEssentialScreen(
+                    onRegionButtonClick = this::onRegionButtonClick
+                )
             }
         }
         return binding.root
@@ -32,5 +35,9 @@ class MakePartyEssentialFragment : Fragment() {
         binding.tbMakePartyEssential.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
+    }
+
+    private fun onRegionButtonClick() {
+        findNavController().navigate(R.id.action_global_addressSearchFragment)
     }
 }
