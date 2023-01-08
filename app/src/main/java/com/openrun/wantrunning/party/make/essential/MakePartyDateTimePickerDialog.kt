@@ -1,15 +1,19 @@
-package com.openrun.wantrunning.party.make
+package com.openrun.wantrunning.party.make.essential
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import com.openrun.wantrunning.ui.BasicButton
 import com.openrun.wantrunning.ui.Gray30
 import com.openrun.wantrunning.ui.Gray5
@@ -20,7 +24,20 @@ import java.time.LocalDate
 import java.time.LocalTime
 
 @Composable
-fun MakePartyDateTimePickerDialog(modifier: Modifier = Modifier) {
+fun MakePartyDateTimePickerDialog(isVisible: Boolean, onDismissRequest: () -> Unit) {
+    if (isVisible) {
+        Dialog(onDismissRequest = onDismissRequest) {
+            MakePartyDateTimePickerDialogContent(
+                modifier = Modifier
+                    .background(color = Color.White, shape = RoundedCornerShape(size = 8.dp))
+                    .padding(all = 12.dp)
+            )
+        }
+    }
+}
+
+@Composable
+private fun MakePartyDateTimePickerDialogContent(modifier: Modifier = Modifier) {
     Column(modifier = modifier) {
         MakePartyDateTimeNumberPicker()
 
@@ -161,9 +178,9 @@ private fun MakePartyDateTimeMinutePicker(modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
 @Composable
-fun MakePartyDateTimePickerDialogPreview() {
+fun MakePartyDateTimePickerDialogContentPreview() {
     WantRunningTheme {
-        MakePartyDateTimePickerDialog(modifier = Modifier.padding(all = 12.dp))
+        MakePartyDateTimePickerDialogContent(modifier = Modifier.padding(all = 12.dp))
     }
 }
 

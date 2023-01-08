@@ -37,6 +37,8 @@ fun MakePartyEssentialScreen(
     val urlErrorMessage by rememberSaveable { mutableStateOf("") }
     val nextButtonEnabled by rememberSaveable { mutableStateOf(false) }
 
+    var dateTimeDialogVisible: Boolean by rememberSaveable { mutableStateOf(false) }
+
     Column(modifier = modifier) {
         Column(
             modifier = Modifier
@@ -61,7 +63,7 @@ fun MakePartyEssentialScreen(
             MakePartyDatetimeContent(
                 dateTime = dateTime,
                 errorMessage = dateTimeErrorMessage,
-                onDateTimeButtonClick = {}
+                onDateTimeButtonClick = { dateTimeDialogVisible = true }
             )
 
             MakePartyPersonnelContent(
@@ -87,6 +89,11 @@ fun MakePartyEssentialScreen(
             onClick = {}
         )
     }
+
+    MakePartyDateTimePickerDialog(
+        isVisible = dateTimeDialogVisible,
+        onDismissRequest = { dateTimeDialogVisible = false }
+    )
 }
 
 @Preview(showBackground = true, backgroundColor = 0xFFFFFFFF, device = Devices.PIXEL_3_XL)
