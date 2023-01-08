@@ -22,7 +22,8 @@ import com.openrun.wantrunning.ui.WantRunningTheme
 
 @Composable
 fun MakePartyEssentialScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onRegionButtonClick: () -> Unit
 ) {
     val scrollState = rememberScrollState()
 
@@ -56,7 +57,7 @@ fun MakePartyEssentialScreen(
             MakePartyRegionContent(
                 address = address,
                 errorMessage = addressErrorMessage,
-                onRegionButtonClick = {}
+                onRegionButtonClick = onRegionButtonClick
             )
 
             MakePartyDatetimeContent(
@@ -95,6 +96,8 @@ fun MakePartyEssentialScreen(
 @Composable
 private fun MakePartyEssentialScreenPreview() {
     WantRunningTheme {
-        MakePartyEssentialScreen()
+        MakePartyEssentialScreen(
+            onRegionButtonClick = {}
+        )
     }
 }
