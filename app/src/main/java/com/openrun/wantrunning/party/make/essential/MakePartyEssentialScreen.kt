@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import com.openrun.wantrunning.R
 import com.openrun.wantrunning.ui.BasicButton
 import com.openrun.wantrunning.ui.WantRunningTheme
+import java.time.LocalDateTime
 
 @Composable
 fun MakePartyEssentialScreen(
@@ -92,7 +93,8 @@ fun MakePartyEssentialScreen(
 
     MakePartyDateTimePickerDialog(
         isVisible = dateTimeDialogVisible,
-        onDismissRequest = { dateTimeDialogVisible = false }
+        onDismissRequest = { dateTimeDialogVisible = false },
+        defaultDateTime = LocalDateTime.now()
     )
 }
 

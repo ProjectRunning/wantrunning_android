@@ -6,13 +6,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -48,19 +45,19 @@ private fun MakePartyDateTimePickerDialogContent(
     defaultDateTime: LocalDateTime,
     onCompleteButtonClick: () -> Unit
 ) {
-    var cachedYear: Int by rememberSaveable { mutableStateOf(defaultDateTime.year) }
-    var cachedMonthValue: Int by rememberSaveable { mutableStateOf(defaultDateTime.monthValue) }
-    var cachedDayOfMonth: Int by rememberSaveable { mutableStateOf(defaultDateTime.dayOfMonth) }
+    var cachedYear: Int by remember { mutableStateOf(defaultDateTime.year) }
+    var cachedMonthValue: Int by remember { mutableStateOf(defaultDateTime.monthValue) }
+    var cachedDayOfMonth: Int by remember { mutableStateOf(defaultDateTime.dayOfMonth) }
 
-    var cachedMidday: DateTimePickerUtils.Midday by rememberSaveable {
+    var cachedMidday: DateTimePickerUtils.Midday by remember {
         mutableStateOf(DateTimePickerUtils.getMidday(defaultDateTime))
     }
-    var cachedHour: Int by rememberSaveable {
+    var cachedHour: Int by remember {
         mutableStateOf(DateTimePickerUtils.getMiddayHour(defaultDateTime))
     }
-    var cachedMinute: Int by rememberSaveable { mutableStateOf(defaultDateTime.minute) }
+    var cachedMinute: Int by remember { mutableStateOf(defaultDateTime.minute) }
 
-    var isValidDateTime: Boolean by rememberSaveable { mutableStateOf(false) }
+    var isValidDateTime: Boolean by remember { mutableStateOf(false) }
 
     Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(space = 8.dp)) {
         MakePartyDateTimeNumberPicker(
@@ -149,7 +146,9 @@ private fun MakePartyDateTimeNumberPicker(
                 onYearSelected.invoke(it)
                 onNumberPickerValueChanged.invoke()
             },
-            modifier = Modifier.weight(1.2f)
+            modifier = Modifier
+                .weight(1.2f)
+                .onFocusChanged { }
         )
 
         NumberPicker(
