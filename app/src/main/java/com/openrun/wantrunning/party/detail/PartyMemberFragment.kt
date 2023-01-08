@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.openrun.wantrunning.R
 import com.openrun.wantrunning.databinding.FragmentPartyMemberBinding
@@ -25,14 +26,22 @@ class PartyMemberFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        initAdapter()
+
+        binding.toolbar.setNavigationOnClickListener {
+            activity?.findNavController(R.id.fcv_main_nav_host)?.popBackStack()
+        }
+
+        binding.rvPartyMember.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun initAdapter() {
         val adapter = VerticalPartyMemberAdapter()
 
         binding.rvPartyMember.adapter = adapter
 
         adapter.data = listOf(0, 1, 2, 3, 4, 5, 6, 7)
-
-        binding.rvPartyMember.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-
-        super.onViewCreated(view, savedInstanceState)
     }
 }
