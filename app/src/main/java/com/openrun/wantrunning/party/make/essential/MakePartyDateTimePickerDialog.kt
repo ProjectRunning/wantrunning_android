@@ -6,7 +6,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -14,228 +18,205 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import com.openrun.wantrunning.ui.BasicButton
-import com.openrun.wantrunning.ui.Gray30
-import com.openrun.wantrunning.ui.Gray5
-import com.openrun.wantrunning.ui.WantRunningTheme
+import com.openrun.wantrunning.ui.*
 import com.openrun.wantrunning.ui.component.NumberPicker
 import com.openrun.wantrunning.util.DateTimePickerUtils
 import java.time.LocalDate
-import java.time.LocalTime
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 @Composable
-fun MakePartyDateTimePickerDialog(isVisible: Boolean, onDismissRequest: () -> Unit) {
+fun MakePartyDateTimePickerDialog(isVisible: Boolean, onDismissRequest: () -> Unit, defaultDateTime: LocalDateTime) {
     if (isVisible) {
         Dialog(onDismissRequest = onDismissRequest) {
             MakePartyDateTimePickerDialogContent(
                 modifier = Modifier
                     .background(color = Color.White, shape = RoundedCornerShape(size = 8.dp))
-                    .padding(all = 12.dp)
+                    .padding(all = 12.dp),
+                defaultDateTime = defaultDateTime,
+                onCompleteButtonClick = {
+                    // TODO: on complete
+                }
             )
         }
     }
 }
 
 @Composable
-private fun MakePartyDateTimePickerDialogContent(modifier: Modifier = Modifier) {
-    Column(modifier = modifier) {
-        MakePartyDateTimeNumberPicker()
+private fun MakePartyDateTimePickerDialogContent(
+    modifier: Modifier = Modifier,
+    defaultDateTime: LocalDateTime,
+    onCompleteButtonClick: () -> Unit
+) {
+    var cachedYear: Int by rememberSaveable { mutableStateOf(defaultDateTime.year) }
+    var cachedMonthValue: Int by rememberSaveable { mutableStateOf(defaultDateTime.monthValue) }
+    var cachedDayOfMonth: Int by rememberSaveable { mutableStateOf(defaultDateTime.dayOfMonth) }
 
-        Spacer(modifier = Modifier.size(size = 8.dp))
+    var cachedMidday: DateTimePickerUtils.Midday by rememberSaveable {
+        mutableStateOf(DateTimePickerUtils.getMidday(defaultDateTime))
+    }
+    var cachedHour: Int by rememberSaveable {
+        mutableStateOf(DateTimePickerUtils.getMiddayHour(defaultDateTime))
+    }
+    var cachedMinute: Int by rememberSaveable { mutableStateOf(defaultDateTime.minute) }
+
+    var isValidDateTime: Boolean by rememberSaveable { mutableStateOf(false) }
+
+    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(space = 8.dp)) {
+        MakePartyDateTimeNumberPicker(
+            selectedYear = cachedYear,
+            selectedMonthValue = cachedMonthValue,
+            selectedDayOfMonth = cachedDayOfMonth,
+            selectedMidday = cachedMidday,
+            selectedHour = cachedHour,
+            selectedMinute = cachedMinute,
+            onYearSelected = { cachedYear = it },
+            onMonthValueSelected = { cachedMonthValue = it },
+            onDayOfMonthSelected = { cachedDayOfMonth = it },
+            onMiddaySelected = { cachedMidday = DateTimePickerUtils.getMiddayByIntValue(intVal = it) },
+            onHourSelected = { cachedHour = it },
+            onMinuteSelected = { cachedMinute = it },
+            onNumberPickerValueChanged = {
+                isValidDateTime = DateTimePickerUtils.isValidDateTime(
+                    year = cachedYear,
+                    monthValue = cachedMonthValue,
+                    dayOfMonth = cachedDayOfMonth,
+                    midday = cachedMidday,
+                    hour = cachedHour,
+                    minute = cachedMinute
+                )
+            }
+        )
 
         Divider(color = Gray5)
 
-        Spacer(modifier = Modifier.size(size = 24.dp))
+        Spacer(modifier = Modifier.size(size = 8.dp))
 
+        val cachedLocalDate = LocalDate.of(cachedYear, cachedMonthValue, cachedDayOfMonth)
+        val patterOfDate = "yyyy년 MM월 dd일 ${DateTimePickerUtils.getDayOfWeekForKR(cachedLocalDate.dayOfWeek)}"
         Text(
-            text = "2023년 01월 08일 일요일",
+            text = cachedLocalDate.format(DateTimeFormatter.ofPattern(patterOfDate)),
             style = MaterialTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
 
-        Spacer(modifier = Modifier.size(size = 8.dp))
-
+        val cachedLocalTime = DateTimePickerUtils.getMiddayLocalTime(cachedMidday, cachedHour, cachedMinute)
+        val patterOfTime = "$cachedMidday hh시 mm분"
         Text(
-            text = "오후 7시 00분",
+            text = cachedLocalTime.format(DateTimeFormatter.ofPattern(patterOfTime)),
             style = MaterialTheme.typography.h1.copy(fontWeight = FontWeight.Bold),
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
 
-        Spacer(modifier = Modifier.size(size = 24.dp))
+        Spacer(modifier = Modifier.size(size = 8.dp))
 
         Text(
-            text = "설정 가능한 일정이에요.",
-            color = Gray30,
+            text = if (isValidDateTime) "설정 가능한 일정이에요." else "설정할 수 없는 일정이에요.",
+            color = if (isValidDateTime) Gray30 else ActiveRed,
             style = MaterialTheme.typography.body1,
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
 
-        Spacer(modifier = Modifier.size(size = 12.dp))
-
-        BasicButton(text = "일정 설정 완료", onClick = { /*TODO*/ }, modifier = Modifier.fillMaxWidth())
+        BasicButton(text = "일정 설정 완료", onClick = onCompleteButtonClick, modifier = Modifier.fillMaxWidth())
     }
 }
 
 @Composable
-private fun MakePartyDateTimeNumberPicker(modifier: Modifier = Modifier) {
+private fun MakePartyDateTimeNumberPicker(
+    modifier: Modifier = Modifier,
+    selectedYear: Int,
+    selectedMonthValue: Int,
+    selectedDayOfMonth: Int,
+    selectedMidday: DateTimePickerUtils.Midday,
+    selectedHour: Int,
+    selectedMinute: Int,
+    onYearSelected: (year: Int) -> Unit,
+    onMonthValueSelected: (monthValue: Int) -> Unit,
+    onDayOfMonthSelected: (dayOfMonth: Int) -> Unit,
+    onMiddaySelected: (intValOfMidday: Int) -> Unit,
+    onHourSelected: (hour: Int) -> Unit,
+    onMinuteSelected: (minute: Int) -> Unit,
+    onNumberPickerValueChanged: () -> Unit
+) {
+    val dayOfMonthList = DateTimePickerUtils.getDayOfMonthList(year = selectedYear, month = selectedMonthValue)
+
     Row(modifier = modifier, horizontalArrangement = Arrangement.spacedBy(space = 4.dp)) {
-        MakePartyDateTimeYearPicker(modifier = Modifier.weight(1f))
+        NumberPicker(
+            values = DateTimePickerUtils.years,
+            displayedValues = DateTimePickerUtils.displayedValuesForYears,
+            selectedValue = selectedYear,
+            onValueSelected = {
+                onYearSelected.invoke(it)
+                onNumberPickerValueChanged.invoke()
+            },
+            modifier = Modifier.weight(1.2f)
+        )
 
-        MakePartyDateTimeMonthPicker(modifier = Modifier.weight(1f))
+        NumberPicker(
+            values = DateTimePickerUtils.months,
+            displayedValues = DateTimePickerUtils.displayedValuesForMonths,
+            selectedValue = selectedMonthValue,
+            onValueSelected = {
+                onMonthValueSelected.invoke(it)
+                onNumberPickerValueChanged.invoke()
+            },
+            modifier = Modifier.weight(1f)
+        )
 
-        MakePartyDateTimeDayOfMonthPicker(modifier = Modifier.weight(1f))
+        NumberPicker(
+            values = dayOfMonthList,
+            displayedValues = dayOfMonthList.map { it.toString() },
+            selectedValue = selectedDayOfMonth,
+            onValueSelected = {
+                onDayOfMonthSelected.invoke(it)
+                onNumberPickerValueChanged.invoke()
+            },
+            modifier = Modifier.weight(1f)
+        )
 
-        MakePartyDateTimeMiddayPicker(modifier = Modifier.weight(1f))
+        NumberPicker(
+            values = DateTimePickerUtils.midday,
+            displayedValues = DateTimePickerUtils.displayedValuesForMidday,
+            selectedValue = selectedMidday.intVal,
+            onValueSelected = {
+                onMiddaySelected.invoke(it)
+                onNumberPickerValueChanged.invoke()
+            },
+            modifier = Modifier.weight(1f)
+        )
 
-        MakePartyDateTimeHourPicker(modifier = Modifier.weight(1f))
+        NumberPicker(
+            values = DateTimePickerUtils.hours,
+            displayedValues = DateTimePickerUtils.displayedValuesForHours,
+            selectedValue = selectedHour,
+            onValueSelected = {
+                onHourSelected.invoke(it)
+                onNumberPickerValueChanged.invoke()
+            },
+            modifier = Modifier.weight(1f)
+        )
 
-        MakePartyDateTimeMinutePicker(modifier = Modifier.weight(1f))
+        NumberPicker(
+            values = DateTimePickerUtils.minutes,
+            displayedValues = DateTimePickerUtils.displayedValuesForMinutes,
+            selectedValue = selectedMinute,
+            onValueSelected = {
+                onMinuteSelected.invoke(it)
+                onNumberPickerValueChanged.invoke()
+            },
+            modifier = Modifier.weight(1f)
+        )
     }
-}
-
-@Composable
-private fun MakePartyDateTimeYearPicker(modifier: Modifier = Modifier) {
-    var selectedYear: Int by remember { mutableStateOf(LocalDate.now().year) }
-
-    NumberPicker(
-        values = DateTimePickerUtils.years,
-        displayedValues = DateTimePickerUtils.displayedValuesForYears,
-        selectedValue = selectedYear,
-        onValueSelected = { selectedYear = it },
-        modifier = modifier
-    )
-}
-
-@Composable
-private fun MakePartyDateTimeMonthPicker(modifier: Modifier = Modifier) {
-    var selectedMonth: Int by remember { mutableStateOf(LocalDate.now().monthValue) }
-
-    NumberPicker(
-        values = DateTimePickerUtils.months,
-        displayedValues = DateTimePickerUtils.displayedValuesForMonths,
-        selectedValue = selectedMonth,
-        onValueSelected = { selectedMonth = it },
-        modifier = modifier
-    )
-}
-
-@Composable
-private fun MakePartyDateTimeDayOfMonthPicker(modifier: Modifier = Modifier) {
-    val dayOfMonthList = DateTimePickerUtils.getDayOfMonthList(
-        year = LocalDate.now().year,
-        month = LocalDate.now().monthValue
-    )
-
-    var selectedDayOfMonth: Int by remember { mutableStateOf(LocalDate.now().dayOfMonth) }
-
-    NumberPicker(
-        values = dayOfMonthList,
-        displayedValues = dayOfMonthList.map { it.toString() },
-        selectedValue = selectedDayOfMonth,
-        onValueSelected = { selectedDayOfMonth = it },
-        modifier = modifier
-    )
-}
-
-@Composable
-private fun MakePartyDateTimeMiddayPicker(modifier: Modifier = Modifier) {
-    var selectedMidday: Int by remember { mutableStateOf(0) }
-
-    NumberPicker(
-        values = DateTimePickerUtils.midday,
-        displayedValues = DateTimePickerUtils.displayedValuesForMidday,
-        selectedValue = selectedMidday,
-        onValueSelected = { selectedMidday = it },
-        modifier = modifier
-    )
-}
-
-@Composable
-private fun MakePartyDateTimeHourPicker(modifier: Modifier = Modifier) {
-    var selectedHour: Int by remember { mutableStateOf(LocalTime.now().hour) }
-
-    NumberPicker(
-        values = DateTimePickerUtils.hours,
-        displayedValues = DateTimePickerUtils.displayedValuesForHours,
-        selectedValue = selectedHour,
-        onValueSelected = { selectedHour = it },
-        modifier = modifier
-    )
-}
-
-@Composable
-private fun MakePartyDateTimeMinutePicker(modifier: Modifier = Modifier) {
-    var selectedMinute: Int by remember { mutableStateOf(LocalTime.now().minute) }
-
-    NumberPicker(
-        values = DateTimePickerUtils.minutes,
-        displayedValues = DateTimePickerUtils.displayedValuesForMinutes,
-        selectedValue = selectedMinute,
-        onValueSelected = { selectedMinute = it },
-        modifier = modifier
-    )
 }
 
 @Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
 @Composable
 fun MakePartyDateTimePickerDialogContentPreview() {
     WantRunningTheme {
-        MakePartyDateTimePickerDialogContent(modifier = Modifier.padding(all = 12.dp))
-    }
-}
-
-@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
-@Composable
-private fun MakePartyDateTimeNumberPickerPreview() {
-    WantRunningTheme {
-        MakePartyDateTimeNumberPicker()
-    }
-}
-
-@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
-@Composable
-private fun MakePartyDateTimeYearPickerPreview() {
-    WantRunningTheme {
-        MakePartyDateTimeYearPicker()
-    }
-}
-
-@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
-@Composable
-private fun MakePartyDateTimeMonthPickerPreview() {
-    WantRunningTheme {
-        MakePartyDateTimeMonthPicker()
-    }
-}
-
-@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
-@Composable
-private fun MakePartyDateTimeDayOfMonthPickerPreview() {
-    WantRunningTheme {
-        MakePartyDateTimeDayOfMonthPicker()
-    }
-}
-
-@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
-@Composable
-private fun MakePartyDateTimeMiddayPickerPreview() {
-    WantRunningTheme {
-        MakePartyDateTimeMiddayPicker()
-    }
-}
-
-@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
-@Composable
-private fun MakePartyDateTimeHourPickerPreview() {
-    WantRunningTheme {
-        MakePartyDateTimeHourPicker()
-    }
-}
-
-@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
-@Composable
-private fun MakePartyDateTimeMinutePickerPreview() {
-    WantRunningTheme {
-        MakePartyDateTimeMinutePicker()
+        MakePartyDateTimePickerDialogContent(
+            modifier = Modifier.padding(all = 12.dp),
+            defaultDateTime = LocalDateTime.now(),
+            onCompleteButtonClick = {}
+        )
     }
 }
