@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import com.openrun.wantrunning.R
 import com.openrun.wantrunning.ui.BasicButton
 import com.openrun.wantrunning.ui.WantRunningTheme
+import java.time.LocalDateTime
 
 @Composable
 fun MakePartyEssentialScreen(
@@ -31,13 +32,14 @@ fun MakePartyEssentialScreen(
     val titleErrorMessage by rememberSaveable { mutableStateOf("") }
     val address by rememberSaveable { mutableStateOf("") }
     val addressErrorMessage by rememberSaveable { mutableStateOf("") }
-    val date by rememberSaveable { mutableStateOf("") }
-    val time by rememberSaveable { mutableStateOf("") }
+    val dateTime by rememberSaveable { mutableStateOf("") }
     val dateTimeErrorMessage by rememberSaveable { mutableStateOf("") }
     val personnel by rememberSaveable { mutableStateOf(2) }
     var url by rememberSaveable { mutableStateOf("") }
     val urlErrorMessage by rememberSaveable { mutableStateOf("") }
     val nextButtonEnabled by rememberSaveable { mutableStateOf(false) }
+
+    var dateTimeDialogVisible: Boolean by rememberSaveable { mutableStateOf(false) }
 
     Column(modifier = modifier) {
         Column(
@@ -61,10 +63,9 @@ fun MakePartyEssentialScreen(
             )
 
             MakePartyDatetimeContent(
-                date = date,
-                time = time,
+                dateTime = dateTime,
                 errorMessage = dateTimeErrorMessage,
-                onDateTimeButtonClick = {}
+                onDateTimeButtonClick = { dateTimeDialogVisible = true }
             )
 
             MakePartyPersonnelContent(
@@ -90,6 +91,12 @@ fun MakePartyEssentialScreen(
             onClick = {}
         )
     }
+
+    MakePartyDateTimePickerDialog(
+        isVisible = dateTimeDialogVisible,
+        onDismissRequest = { dateTimeDialogVisible = false },
+        defaultDateTime = LocalDateTime.now()
+    )
 }
 
 @Preview(showBackground = true, backgroundColor = 0xFFFFFFFF, device = Devices.PIXEL_3_XL)

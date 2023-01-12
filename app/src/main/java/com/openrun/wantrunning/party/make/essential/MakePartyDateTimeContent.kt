@@ -19,8 +19,7 @@ import com.openrun.wantrunning.ui.WantRunningTheme
 @Composable
 fun MakePartyDatetimeContent(
     modifier: Modifier = Modifier,
-    date: String,
-    time: String,
+    dateTime: String,
     errorMessage: String,
     onDateTimeButtonClick: () -> Unit
 ) {
@@ -30,7 +29,7 @@ fun MakePartyDatetimeContent(
             isEssentialField = true
         )
 
-        MakePartyDateTimeTextField(date = date, time = time, onDateTimeButtonClick = onDateTimeButtonClick)
+        MakePartyDateTimeTextField(dateTime = dateTime, onDateTimeButtonClick = onDateTimeButtonClick)
 
         if (errorMessage.isNotBlank()) {
             TextFieldErrorText(errorMessage = errorMessage)
@@ -41,35 +40,24 @@ fun MakePartyDatetimeContent(
 @Composable
 private fun MakePartyDateTimeTextField(
     modifier: Modifier = Modifier,
-    date: String,
-    time: String,
+    dateTime: String,
     onDateTimeButtonClick: () -> Unit
 ) {
+
     Row(
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(space = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         BoxedTextField(
-            modifier = Modifier.weight(1.3f),
-            value = date,
+            modifier = Modifier.weight(1f),
+            value = dateTime,
             hint = stringResource(id = R.string.make_party_date_hint),
             readOnly = true,
             onValueChange = {}
         )
 
-        BoxedTextField(
-            modifier = Modifier.weight(1f),
-            value = time,
-            hint = stringResource(id = R.string.make_party_time_hint),
-            readOnly = true,
-            onValueChange = {}
-        )
-
-        BasicIconButton(
-            iconResId = R.drawable.ic_calendar_24,
-            onClick = onDateTimeButtonClick
-        )
+        BasicIconButton(iconResId = R.drawable.ic_calendar_24, onClick = onDateTimeButtonClick)
     }
 }
 
@@ -78,8 +66,7 @@ private fun MakePartyDateTimeTextField(
 private fun MakePartyDateTimeContentPreview() {
     WantRunningTheme {
         MakePartyDatetimeContent(
-            date = "12월 3일 토요일",
-            time = "오후 6:00",
+            dateTime = "",
             errorMessage = "날짜 및 시간을 입력해주세요.",
             onDateTimeButtonClick = {}
         )
@@ -90,8 +77,7 @@ private fun MakePartyDateTimeContentPreview() {
 @Composable
 private fun MakePartyDateTimeTextFieldPreview() {
     MakePartyDateTimeTextField(
-        date = "",
-        time = "",
+        dateTime = "2022년 12월 25일 일요일 오후 11:00",
         onDateTimeButtonClick = {}
     )
 }
