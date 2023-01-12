@@ -3,6 +3,8 @@
 
     <style name="TextAppearance.WantRunning.ToolbarTitle" parent="">
         <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/gray_90</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="tab_text" parent="@android:style/TextAppearance.Widget.TabWidget">
