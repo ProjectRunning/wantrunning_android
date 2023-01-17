@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">wantrunning</string>
 
-    <string name="kakao_oauth_scheme">kakao$eebfb71f9702b1234600974d9968ed62</string>
+    <string name="kakao_oauth_scheme">kakaoeebfb71f9702b1234600974d9968ed62</string>
     <string name="kakao_native_app_key">eebfb71f9702b1234600974d9968ed62</string>
 
     <string name="nav_home_title">번개파티</string>
