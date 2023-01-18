@@ -1,11 +1,17 @@
 package com.openrun.wantrunning.signing
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,13 +23,20 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
+import com.openrun.wantrunning.BuildConfig
 import com.openrun.wantrunning.databinding.FragmentSignInBinding
 import com.openrun.wantrunning.ui.BasicButton
 import com.openrun.wantrunning.ui.WantRunningTheme
+import com.openrun.wantrunning.util.makeToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,6 +44,11 @@ class SignInFragment : Fragment() {
 
     private var _binding: FragmentSignInBinding? = null
     private val binding: FragmentSignInBinding get() = _binding!!
+
+    private val googleSignInActivityResultLauncher: ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
+            onGoogleSignInResult(activityResult = activityResult)
+        }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentSignInBinding.inflate(inflater, container, false)
@@ -53,8 +71,12 @@ class SignInFragment : Fragment() {
         }
     }
 
-    private fun onGoogleSignInButtonClick() {
-
+    private fun onGoogleSignInButtonClick(context: Context) {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(BuildConfig.GOOGLE_WEB_CLIENT_ID)
+            .build()
+        val googleSignInClient = GoogleSignIn.getClient(context, gso)
+        googleSignInActivityResultLauncher.launch(googleSignInClient.signInIntent)
     }
 
     private fun onKakaoTalkSignInAvailable(context: Context) {
@@ -85,13 +107,32 @@ class SignInFragment : Fragment() {
             Log.d("SignInFragment", "onRequireKakaoAccountSignIn: ${oAuthToken.accessToken}")
         }
     }
+
+    private fun onGoogleSignInResult(activityResult: ActivityResult) {
+        if (activityResult.resultCode == Activity.RESULT_OK) {
+            val completedTask = GoogleSignIn.getSignedInAccountFromIntent(activityResult.data)
+            onGoogleSignInComplete(task = completedTask)
+        } else {
+            makeToast("구글 로그인을 완료하지 못했습니다.", Toast.LENGTH_SHORT)
+        }
+    }
+
+    private fun onGoogleSignInComplete(task: Task<GoogleSignInAccount>) {
+        try {
+            val account: GoogleSignInAccount = task.getResult(ApiException::class.java)
+
+            Log.d("SignInFragment", "onGoogleSignInComplete: ${account.idToken}")
+        } catch (e: ApiException) {
+            Log.e("SignInFragment", "onGoogleSignInComplete: ${e.statusCode}", e)
+        }
+    }
 }
 
 @Composable
 private fun SignInScreen(
     modifier: Modifier = Modifier,
     onKakaoSignInButtonClick: (context: Context) -> Unit,
-    onGoogleSignInButtonClick: () -> Unit
+    onGoogleSignInButtonClick: (context: Context) -> Unit
 ) {
     val context: Context = LocalContext.current
 
@@ -102,7 +143,11 @@ private fun SignInScreen(
             modifier = Modifier.fillMaxWidth()
         )
 
-        BasicButton(text = "구글 로그인", onClick = onGoogleSignInButtonClick, modifier = Modifier.fillMaxWidth())
+        BasicButton(
+            text = "구글 로그인",
+            onClick = { onGoogleSignInButtonClick.invoke(context) },
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 }
 
