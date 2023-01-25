@@ -14,21 +14,24 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.naver.maps.map.MapView
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.openrun.wantrunning.databinding.FragmentMainRunningBinding
 import com.openrun.wantrunning.running.service.LocationUpdateService
-import dagger.hilt.android.AndroidEntryPoint
+import com.openrun.wantrunning.util.base.BaseFragment
 
-@AndroidEntryPoint
-class MainRunningFragment : Fragment(), OnMapReadyCallback {
+class MainRunningFragment : BaseFragment(), OnMapReadyCallback {
+
     private lateinit var mMapView: MapView
     private lateinit var mService: LocationUpdateService
+
     private val viewModel by viewModels<MainRunningViewModel>()
+
     private var mBound: Boolean = false
+
+    override var fullScreen: Boolean = true
 
     private val connection = object : ServiceConnection {
 

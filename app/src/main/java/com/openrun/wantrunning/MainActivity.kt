@@ -1,9 +1,9 @@
+@file:Suppress("DEPRECATION")
+
 package com.openrun.wantrunning
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.Animation.AnimationListener
 import android.view.animation.AnimationUtils
@@ -31,6 +31,10 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
         binding.bnvMainNav.setupWithNavController(navController = navController)
 
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+
         navController.addOnDestinationChangedListener { _, destination, _ ->
             onDestinationChanged(destination = destination)
         }
@@ -38,7 +42,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun onDestinationChanged(destination: NavDestination) {
         controlBottomNavigationViewVisibility(destination = destination)
-        controlStatusBar(destination = destination)
     }
 
     private fun controlBottomNavigationViewVisibility(destination: NavDestination) {
@@ -54,15 +57,6 @@ class MainActivity : AppCompatActivity() {
             hideBottomNavigationView()
         } else {
             binding.bnvMainNav.isVisible = mainScreens.contains(destination.id)
-        }
-    }
-
-    private fun controlStatusBar(destination: NavDestination) {
-        val fullScreen = listOf(R.id.mainRunningFragment)
-        if (fullScreen.contains(destination.id)) {
-            setStatusBarTransparent()
-        } else {
-            setStatusBarOrigin()
         }
     }
 
@@ -92,21 +86,5 @@ class MainActivity : AppCompatActivity() {
             override fun onAnimationRepeat(p0: Animation?) {}
         })
         binding.bnvMainNav.startAnimation(hideAnimation)
-    }
-
-    private fun setStatusBarTransparent() {
-        val window = window ?: return
-
-        window.statusBarColor = Color.TRANSPARENT
-        window.decorView.systemUiVisibility =
-            View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-        setWindowFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true)
-    }
-
-    private fun setStatusBarOrigin() {
-        val window = window ?: return
-
-        window.statusBarColor = Color.WHITE
-        window.decorView
     }
 }
