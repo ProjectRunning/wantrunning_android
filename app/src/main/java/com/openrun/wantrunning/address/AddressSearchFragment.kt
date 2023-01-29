@@ -25,10 +25,11 @@ import com.openrun.wantrunning.base.ui.compose.BoxedTextField
 import com.openrun.wantrunning.databinding.FragmentAddressSearchBinding
 import com.openrun.wantrunning.ui.BasicButton
 import com.openrun.wantrunning.ui.WantRunningTheme
+import com.openrun.wantrunning.util.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddressSearchFragment : Fragment(), OnMapReadyCallback {
+class AddressSearchFragment : BaseFragment(), OnMapReadyCallback {
 
     private var _binding: FragmentAddressSearchBinding? = null
     private val binding: FragmentAddressSearchBinding get() = _binding!!

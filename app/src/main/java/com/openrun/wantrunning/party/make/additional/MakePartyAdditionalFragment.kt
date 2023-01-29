@@ -7,10 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.openrun.wantrunning.databinding.FragmentMakePartyAdditiionalBinding
+import com.openrun.wantrunning.util.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MakePartyAdditionalFragment : Fragment() {
+class MakePartyAdditionalFragment : BaseFragment() {
 
     private var _binding: FragmentMakePartyAdditiionalBinding? = null
     private val binding: FragmentMakePartyAdditiionalBinding get() = _binding!!
