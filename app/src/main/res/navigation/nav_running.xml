@@ -4,9 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_running"
     app:startDestination="@id/mainRunningFragment">
+
+    <fragment
+        android:id="@+id/countingFragment"
+        android:name="com.openrun.wantrunning.counting.CountingFragment"
+        android:label="CountingFragment"
+        tools:layout="@layout/fragment_counting">
+
+    </fragment>
+
     <fragment
         android:id="@+id/mainRunningFragment"
         android:name="com.openrun.wantrunning.running.MainRunningFragment"
         android:label="MainRunningFragment"
-        tools:layout="@layout/fragment_main_running" />
+        tools:layout="@layout/fragment_main_running">
+
+        <action
+            android:id="@+id/action_mainRunningFragment_to_countingFragment"
+            app:destination="@id/countingFragment" />
+    </fragment>
 </navigation>
