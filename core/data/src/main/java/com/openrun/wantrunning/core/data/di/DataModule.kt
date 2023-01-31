@@ -12,7 +12,5 @@ import dagger.hilt.components.SingletonComponent
 internal interface DataModule {
 
     @Binds
-    fun bindsUserRepository(
-        userRepositoryImpl: UserRepositoryImpl
-    ): UserRepository
+    fun bindsUserRepository(userRepositoryImpl: UserRepositoryImpl): UserRepository
 }
