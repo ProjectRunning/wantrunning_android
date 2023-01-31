@@ -5,16 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.openrun.wantrunning.R
 import com.openrun.wantrunning.databinding.FragmentMainHomeBinding
-import dagger.hilt.android.AndroidEntryPoint
+import com.openrun.wantrunning.util.base.BaseFragment
 
-@AndroidEntryPoint
-class MainHomeFragment : Fragment() {
+class MainHomeFragment : BaseFragment() {
 
     private var _binding: FragmentMainHomeBinding? = null
     private val binding: FragmentMainHomeBinding get() = _binding!!
@@ -29,6 +27,8 @@ class MainHomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         demoCollectionAdapter = DemoCollectionAdapter(this)
         viewPager = binding.vpFragment
         viewPager.adapter = demoCollectionAdapter
