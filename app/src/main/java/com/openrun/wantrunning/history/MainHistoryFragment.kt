@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.openrun.wantrunning.databinding.FragmentMainHistoryBinding
+import com.openrun.wantrunning.util.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainHistoryFragment : Fragment() {
+class MainHistoryFragment : BaseFragment() {
 
     private var _binding: FragmentMainHistoryBinding? = null
     private val binding: FragmentMainHistoryBinding get() = _binding!!

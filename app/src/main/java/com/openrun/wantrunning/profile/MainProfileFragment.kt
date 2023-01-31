@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.openrun.wantrunning.databinding.FragmentMainProfileBinding
+import com.openrun.wantrunning.util.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainProfileFragment : Fragment() {
+class MainProfileFragment : BaseFragment() {
 
     private var _binding: FragmentMainProfileBinding? = null
     private val binding: FragmentMainProfileBinding get() = _binding!!

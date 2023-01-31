@@ -10,8 +10,9 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.openrun.wantrunning.R
 import com.openrun.wantrunning.databinding.FragmentPartyMemberBinding
+import com.openrun.wantrunning.util.base.BaseFragment
 
-class PartyMemberFragment : Fragment() {
+class PartyMemberFragment : BaseFragment() {
 
     private var _binding: FragmentPartyMemberBinding? = null
     private val binding: FragmentPartyMemberBinding get() = _binding!!

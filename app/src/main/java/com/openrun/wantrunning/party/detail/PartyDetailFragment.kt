@@ -11,10 +11,11 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.openrun.wantrunning.R
 import com.openrun.wantrunning.databinding.FragmentPartyDetailBinding
+import com.openrun.wantrunning.util.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PartyDetailFragment : Fragment() {
+class PartyDetailFragment : BaseFragment() {
 
     private var _binding: FragmentPartyDetailBinding? = null
     private val binding: FragmentPartyDetailBinding get() = _binding!!

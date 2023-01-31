@@ -10,10 +10,10 @@ import androidx.navigation.fragment.findNavController
 import com.openrun.wantrunning.R
 import com.openrun.wantrunning.ui.WantRunningTheme
 import com.openrun.wantrunning.databinding.FragmentMakePartyEssentialBinding
+import com.openrun.wantrunning.util.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
-class MakePartyEssentialFragment : Fragment() {
+class MakePartyEssentialFragment : BaseFragment() {
 
     private var _binding: FragmentMakePartyEssentialBinding? = null
     private val binding: FragmentMakePartyEssentialBinding get() = _binding!!
