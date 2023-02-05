@@ -12,12 +12,12 @@ class UserRepositoryImpl @Inject constructor(
 
     override suspend fun getSocialSigningInfo(accessToken: String, host: SocialSigningHost): Boolean {
         return try {
-            val request = SocialSigningRequest(accessToken = accessToken, host = host)
-            val response = userService.getSocialSigningInfo(request = request)
+            val signingRequest = SocialSigningRequest(accessToken = accessToken, host = host)
+            val response = userService.getSocialSigningInfo(request = signingRequest)
             Log.d("UserRepositoryImpl", "getSocialSigningInfo: $response")
-            true
+            response.isSuccessful
         } catch (e: Exception) {
-            e.printStackTrace()
+            Log.e("UserRepositoryImpl", "getSocialSigningInfo: ${e.message}", e)
             false
         }
     }
