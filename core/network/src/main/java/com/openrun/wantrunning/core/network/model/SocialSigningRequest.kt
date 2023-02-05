@@ -4,6 +4,6 @@ import com.google.gson.annotations.SerializedName
 import com.openrun.wantrunning.core.model.SocialSigningHost
 
 data class SocialSigningRequest(
-    @SerializedName("access_token") val accessToken: String,
+    @SerializedName("accessToken") val accessToken: String,
     @SerializedName("host") val host: SocialSigningHost
 )
