@@ -1,12 +1,9 @@
 package com.openrun.wantrunning.util
 
-import java.time.DayOfWeek
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.LocalTime
-import kotlin.math.min
+import java.time.*
+import java.time.format.DateTimeFormatter
 
-object DateTimePickerUtils {
+object DateTimeUtils {
 
     val years: List<Int> = (1970..2100).toList()
     val displayedValuesForYears: List<String> = years.map { it.toString() }
@@ -78,5 +75,16 @@ object DateTimePickerUtils {
         val argsDateTime = LocalDateTime.of(argsDate, argsTime)
 
         return now.isBefore(argsDateTime)
+    }
+
+    fun LocalDate.format(pattern: String): String? {
+        return try {
+            val formatter = DateTimeFormatter.ofPattern(pattern)
+            this.format(formatter) ?: null
+        } catch (e: IllegalArgumentException) {
+            null
+        } catch (e: DateTimeException) {
+            null
+        }
     }
 }

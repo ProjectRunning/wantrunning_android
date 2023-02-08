@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.openrun.wantrunning.ui.*
 import com.openrun.wantrunning.ui.component.NumberPicker
-import com.openrun.wantrunning.util.DateTimePickerUtils
+import com.openrun.wantrunning.util.DateTimeUtils
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -49,11 +49,11 @@ private fun MakePartyDateTimePickerDialogContent(
     var cachedMonthValue: Int by remember { mutableStateOf(defaultDateTime.monthValue) }
     var cachedDayOfMonth: Int by remember { mutableStateOf(defaultDateTime.dayOfMonth) }
 
-    var cachedMidday: DateTimePickerUtils.Midday by remember {
-        mutableStateOf(DateTimePickerUtils.getMidday(defaultDateTime))
+    var cachedMidday: DateTimeUtils.Midday by remember {
+        mutableStateOf(DateTimeUtils.getMidday(defaultDateTime))
     }
     var cachedHour: Int by remember {
-        mutableStateOf(DateTimePickerUtils.getMiddayHour(defaultDateTime))
+        mutableStateOf(DateTimeUtils.getMiddayHour(defaultDateTime))
     }
     var cachedMinute: Int by remember { mutableStateOf(defaultDateTime.minute) }
 
@@ -70,11 +70,11 @@ private fun MakePartyDateTimePickerDialogContent(
             onYearSelected = { cachedYear = it },
             onMonthValueSelected = { cachedMonthValue = it },
             onDayOfMonthSelected = { cachedDayOfMonth = it },
-            onMiddaySelected = { cachedMidday = DateTimePickerUtils.getMiddayByIntValue(intVal = it) },
+            onMiddaySelected = { cachedMidday = DateTimeUtils.getMiddayByIntValue(intVal = it) },
             onHourSelected = { cachedHour = it },
             onMinuteSelected = { cachedMinute = it },
             onNumberPickerValueChanged = {
-                isValidDateTime = DateTimePickerUtils.isValidDateTime(
+                isValidDateTime = DateTimeUtils.isValidDateTime(
                     year = cachedYear,
                     monthValue = cachedMonthValue,
                     dayOfMonth = cachedDayOfMonth,
@@ -90,14 +90,14 @@ private fun MakePartyDateTimePickerDialogContent(
         Spacer(modifier = Modifier.size(size = 8.dp))
 
         val cachedLocalDate = LocalDate.of(cachedYear, cachedMonthValue, cachedDayOfMonth)
-        val patterOfDate = "yyyy년 MM월 dd일 ${DateTimePickerUtils.getDayOfWeekForKR(cachedLocalDate.dayOfWeek)}"
+        val patterOfDate = "yyyy년 MM월 dd일 ${DateTimeUtils.getDayOfWeekForKR(cachedLocalDate.dayOfWeek)}"
         Text(
             text = cachedLocalDate.format(DateTimeFormatter.ofPattern(patterOfDate)),
             style = MaterialTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
 
-        val cachedLocalTime = DateTimePickerUtils.getMiddayLocalTime(cachedMidday, cachedHour, cachedMinute)
+        val cachedLocalTime = DateTimeUtils.getMiddayLocalTime(cachedMidday, cachedHour, cachedMinute)
         val patterOfTime = "$cachedMidday hh시 mm분"
         Text(
             text = cachedLocalTime.format(DateTimeFormatter.ofPattern(patterOfTime)),
@@ -124,7 +124,7 @@ private fun MakePartyDateTimeNumberPicker(
     selectedYear: Int,
     selectedMonthValue: Int,
     selectedDayOfMonth: Int,
-    selectedMidday: DateTimePickerUtils.Midday,
+    selectedMidday: DateTimeUtils.Midday,
     selectedHour: Int,
     selectedMinute: Int,
     onYearSelected: (year: Int) -> Unit,
@@ -135,12 +135,12 @@ private fun MakePartyDateTimeNumberPicker(
     onMinuteSelected: (minute: Int) -> Unit,
     onNumberPickerValueChanged: () -> Unit
 ) {
-    val dayOfMonthList = DateTimePickerUtils.getDayOfMonthList(year = selectedYear, month = selectedMonthValue)
+    val dayOfMonthList = DateTimeUtils.getDayOfMonthList(year = selectedYear, month = selectedMonthValue)
 
     Row(modifier = modifier, horizontalArrangement = Arrangement.spacedBy(space = 4.dp)) {
         NumberPicker(
-            values = DateTimePickerUtils.years,
-            displayedValues = DateTimePickerUtils.displayedValuesForYears,
+            values = DateTimeUtils.years,
+            displayedValues = DateTimeUtils.displayedValuesForYears,
             selectedValue = selectedYear,
             onValueSelected = {
                 onYearSelected.invoke(it)
@@ -152,8 +152,8 @@ private fun MakePartyDateTimeNumberPicker(
         )
 
         NumberPicker(
-            values = DateTimePickerUtils.months,
-            displayedValues = DateTimePickerUtils.displayedValuesForMonths,
+            values = DateTimeUtils.months,
+            displayedValues = DateTimeUtils.displayedValuesForMonths,
             selectedValue = selectedMonthValue,
             onValueSelected = {
                 onMonthValueSelected.invoke(it)
@@ -174,8 +174,8 @@ private fun MakePartyDateTimeNumberPicker(
         )
 
         NumberPicker(
-            values = DateTimePickerUtils.midday,
-            displayedValues = DateTimePickerUtils.displayedValuesForMidday,
+            values = DateTimeUtils.midday,
+            displayedValues = DateTimeUtils.displayedValuesForMidday,
             selectedValue = selectedMidday.intVal,
             onValueSelected = {
                 onMiddaySelected.invoke(it)
@@ -185,8 +185,8 @@ private fun MakePartyDateTimeNumberPicker(
         )
 
         NumberPicker(
-            values = DateTimePickerUtils.hours,
-            displayedValues = DateTimePickerUtils.displayedValuesForHours,
+            values = DateTimeUtils.hours,
+            displayedValues = DateTimeUtils.displayedValuesForHours,
             selectedValue = selectedHour,
             onValueSelected = {
                 onHourSelected.invoke(it)
@@ -196,8 +196,8 @@ private fun MakePartyDateTimeNumberPicker(
         )
 
         NumberPicker(
-            values = DateTimePickerUtils.minutes,
-            displayedValues = DateTimePickerUtils.displayedValuesForMinutes,
+            values = DateTimeUtils.minutes,
+            displayedValues = DateTimeUtils.displayedValuesForMinutes,
             selectedValue = selectedMinute,
             onValueSelected = {
                 onMinuteSelected.invoke(it)
