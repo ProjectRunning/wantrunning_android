@@ -37,13 +37,13 @@ import com.openrun.wantrunning.core.model.SocialSigningHost
 import com.openrun.wantrunning.databinding.FragmentSignInBinding
 import com.openrun.wantrunning.ui.BasicButton
 import com.openrun.wantrunning.ui.WantRunningTheme
+import com.openrun.wantrunning.util.autoCleared
 import com.openrun.wantrunning.util.base.BaseFragment
-import com.openrun.wantrunning.util.makeToast
+import com.openrun.wantrunning.util.extension.makeToast
 
 class SignInFragment : BaseFragment() {
 
-    private var _binding: FragmentSignInBinding? = null
-    private val binding: FragmentSignInBinding get() = _binding!!
+    private var binding by autoCleared<FragmentSignInBinding>()
 
     private val viewModel by viewModels<SignInViewModel>()
 
@@ -53,7 +53,7 @@ class SignInFragment : BaseFragment() {
         }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentSignInBinding.inflate(inflater, container, false)
+        binding = FragmentSignInBinding.inflate(inflater, container, false)
         binding.root.setContent {
             SignInScreen(
                 onKakaoSignInButtonClick = this::onKakaoSignInButtonClick,
