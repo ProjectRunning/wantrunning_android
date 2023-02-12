@@ -13,8 +13,13 @@ android {
 dependencies {
     api(project(":core:model"))
     implementation(project(":core:network"))
+    implementation(project(":core:database"))
     testImplementation(project(":core:test"))
 
+    // di
     implementation('com.google.dagger:hilt-android:2.44.2')
     kapt('com.google.dagger:hilt-compiler:2.44.2')
+
+    // network
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
 }
