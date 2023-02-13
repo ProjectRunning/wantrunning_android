@@ -22,46 +22,159 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
-<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--            android:id="@+id/fab_back"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:backgroundTint="@color/design_default_color_primary"-->
-<!--            app:borderWidth="0dp"-->
-<!--            app:fabSize="mini"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="0.044"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="@+id/map"-->
-<!--            app:layout_constraintVertical_bias="0.023"-->
-<!--            app:srcCompat="@drawable/ic_baseline_arrow_back_24"-->
-<!--            app:tint="#ffffff"/>-->
+        <LinearLayout
+            android:id="@+id/ll_has_party"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="55dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:background="@drawable/bg_running_party_notice"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0"
+            android:weightSum="1"
+            android:gravity="center_vertical">
 
-        <Button
+            <TextView
+                android:id="@+id/tv_party_noon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/running_afternoon"
+                android:textSize="14sp"
+                android:textColor="@color/gray_90"
+                android:fontFamily="@font/pretendard_variable"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tv_party_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/running_time_unknown"
+                android:textSize="14sp"
+                android:textColor="@color/gray_90"
+                android:fontFamily="@font/pretendard_variable"
+                android:textStyle="bold"
+                android:layout_marginEnd="6dp"/>
+
+            <TextView
+                android:id="@+id/tv_has_party"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/running_has_party"
+                android:textSize="14sp"
+                android:textColor="@color/gray_40"
+                android:fontFamily="@font/pretendard_variable"
+                android:textStyle="bold"
+                android:layout_marginEnd="6dp"/>
+
+            <TextView
+                android:id="@+id/tv_activate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/running_activate"
+                android:textSize="14sp"
+                android:textColor="@color/primary_2"
+                android:fontFamily="@font/pretendard_variable"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+        
+        <LinearLayout
+            android:id="@+id/ll_no_party"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="55dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:background="@drawable/bg_running_party_notice"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0"
+            android:weightSum="1"
+            android:visibility="gone"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tv_no_party"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/running_no_party"
+                android:textSize="14sp"
+                android:textColor="@color/primary_2"
+                android:fontFamily="@font/pretendard_variable"
+                android:textStyle="bold"
+                android:layout_marginEnd="6dp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_gray_alert_24"/>
+            
+        </LinearLayout>
+
+        <android.widget.Button
             android:id="@+id/btn_start_run"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:text="Start Run"
+            android:layout_width="159dp"
+            android:layout_height="59dp"
+            android:text="@string/running_button_run_alone"
+            android:textColor="@color/white"
+            android:fontFamily="@font/pretendard_variable"
+            android:textSize="16sp"
+            android:textStyle="bold"
             android:visibility="@{vm.isRunning ? View.GONE : View.VISIBLE }"
+            android:backgroundTint="@color/primary_2"
+            android:background="@drawable/bg_running_button"
+            android:layout_marginBottom="68dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.9" />
+            app:layout_constraintVertical_bias="1" />
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btn_stop_run"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:text="Stop Run"
+            android:layout_width="159dp"
+            android:layout_height="59dp"
+            android:text="@string/running_button_running_done"
+            android:textColor="@color/white"
+            android:fontFamily="@font/pretendard_variable"
+            android:textSize="16sp"
+            android:textStyle="bold"
             android:visibility="@{vm.isRunning ? View.VISIBLE : View.GONE }"
-            android:backgroundTint="@color/design_default_color_error"
+            android:backgroundTint="@color/primary_2"
+            android:background="@drawable/bg_running_button"
+            android:layout_marginBottom="68dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.9" />
+            app:layout_constraintVertical_bias="1" />
+
+        <android.widget.ImageButton
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:src="@drawable/ic_cur_loc_24"
+            android:background="@drawable/bg_current_location_btn"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1"
+            app:layout_constraintHorizontal_bias="0"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

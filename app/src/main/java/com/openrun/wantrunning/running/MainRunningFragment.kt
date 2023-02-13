@@ -15,9 +15,11 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.naver.maps.map.MapView
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
+import com.openrun.wantrunning.R
 import com.openrun.wantrunning.databinding.FragmentMainRunningBinding
 import com.openrun.wantrunning.running.service.LocationUpdateService
 import com.openrun.wantrunning.util.base.BaseFragment
@@ -69,6 +71,7 @@ class MainRunningFragment : BaseFragment(), OnMapReadyCallback {
 
         binding.btnStartRun.setOnClickListener {
             viewModel.isRunning.postValue(true)
+            findNavController().navigate(R.id.action_mainRunningFragment_to_countingFragment)
         }
 
         binding.btnStopRun.setOnClickListener {
