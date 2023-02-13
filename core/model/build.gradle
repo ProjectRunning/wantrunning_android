@@ -6,6 +6,11 @@ plugins {
 android {
     namespace 'com.openrun.wantrunning.core.model'
     compileSdk 33
+
+    defaultConfig {
+        minSdk 24
+        targetSdk 33
+    }
 }
 
 dependencies {
