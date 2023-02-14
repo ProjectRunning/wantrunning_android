@@ -54,6 +54,7 @@ class MainHistoryFragment : BaseFragment() {
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun MainHistoryScreen() {
     val currentLocalDensity = LocalDensity.current
@@ -75,7 +76,40 @@ private fun MainHistoryScreen() {
         LazyColumn(modifier = Modifier.padding(top = topCalendarSheetHeight + 30.dp)) {
             // first, setup selected date record
             item {
-                MainHistorySelectedDateContent(selectedDate = LocalDate.now(), modifier = Modifier.fillMaxWidth())
+                // TODO: selected date
+                MainHistorySelectedDateRecordContent(selectedDate = LocalDate.now(), modifier = Modifier.fillMaxWidth())
+            }
+
+            // item for divider
+            item {
+                Divider(color = Gray1, thickness = 6.dp, modifier = Modifier.padding(top = 24.dp))
+            }
+
+            // item for recent records title
+            item {
+                Text(
+                    text = "최근 운동 기록",
+                    style = WantRunningTypography.h1.copy(fontWeight = FontWeight(weight = 600)),
+                    modifier = Modifier.padding(top = 24.dp, start = 16.dp)
+                )
+            }
+
+            if (RunningHistory.recentMockingDataList.isEmpty()) {
+                // item for empty recent record
+                item {
+                    MainHistoryRecentRecordsEmpty(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 24.dp, horizontal = 16.dp)
+                    )
+                }
+            } else {
+                // items for recent records
+                RunningHistory.recentMockingDataList.groupBy { it.date }.forEach { (date, runningHistory) ->
+                    stickyHeader {
+
+                    }
+                }
             }
         }
     }
@@ -97,7 +131,7 @@ private fun MainHistoryCalendarSheet(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun MainHistorySelectedDateContent(modifier: Modifier = Modifier, selectedDate: LocalDate) {
+private fun MainHistorySelectedDateRecordContent(modifier: Modifier = Modifier, selectedDate: LocalDate) {
     Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
             text = "${selectedDate.format(pattern = "MM월 dd일")} " +
@@ -127,33 +161,34 @@ private fun MainHistorySelectedDateContent(modifier: Modifier = Modifier, select
             Spacer(modifier = Modifier.size(size = 18.dp))
 
             RunningHistory.selectedMockingData.forEach { runningHistory ->
-                Box(
+                MainHistorySelectedDateRecordBox(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(color = Gray1_Opacity60, shape = RoundedCornerShape(size = 8.dp))
-                        .padding(top = 12.dp, start = 16.dp, end = 16.dp)
-                ) {
-
-                }
+                        .padding(top = 12.dp, start = 16.dp, end = 16.dp),
+                    time = runningHistory.time,
+                    distance = runningHistory.distance,
+                    heartbeat = runningHistory.heartbeat
+                )
             }
         }
-
-        Spacer(modifier = Modifier.size(size = 24.dp))
-
-        Divider(color = Gray1, thickness = 6.dp)
     }
 }
 
 @Composable
-private fun MainHistorySelectedRecordBox(modifier: Modifier = Modifier) {
-    Box(modifier = modifier) {
+private fun MainHistorySelectedDateRecordBox(
+    modifier: Modifier = Modifier,
+    time: String,
+    distance: Int,
+    heartbeat: Int
+) {
+    Box(modifier = modifier.background(color = Gray1_Opacity60, shape = RoundedCornerShape(size = 8.dp))) {
         Row(
             modifier = Modifier
-                .background(color = Gray1_Opacity60, shape = RoundedCornerShape(size = 8.dp))
-                .padding(vertical = 20.dp, horizontal = 10.dp)
+                .fillMaxWidth()
+                .padding(vertical = 20.dp, horizontal = 12.dp)
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.weight(1f)) {
-                Text(text = "0:53:25", color = Gray90, fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                Text(text = time, color = Gray90, fontSize = 18.sp, fontWeight = FontWeight.Bold)
 
                 Spacer(modifier = Modifier.size(size = 12.dp))
 
@@ -167,7 +202,7 @@ private fun MainHistorySelectedRecordBox(modifier: Modifier = Modifier) {
             )
 
             Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.weight(1f)) {
-                Text(text = "10 km", color = Gray90, fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                Text(text = "$distance km", color = Gray90, fontSize = 18.sp, fontWeight = FontWeight.Bold)
 
                 Spacer(modifier = Modifier.size(size = 12.dp))
 
@@ -181,7 +216,7 @@ private fun MainHistorySelectedRecordBox(modifier: Modifier = Modifier) {
             )
 
             Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.weight(1f)) {
-                Text(text = "180 bpm", color = Gray90, fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                Text(text = "$heartbeat bpm", color = Gray90, fontSize = 18.sp, fontWeight = FontWeight.Bold)
 
                 Spacer(modifier = Modifier.size(size = 12.dp))
 
@@ -191,69 +226,86 @@ private fun MainHistorySelectedRecordBox(modifier: Modifier = Modifier) {
     }
 }
 
+@Composable
+private fun MainHistoryRecentRecordsEmpty(modifier: Modifier = Modifier) {
+    Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
+        Image(
+            painter = painterResource(id = R.drawable.img_running_empty),
+            contentDescription = null,
+            modifier = Modifier.size(size = 150.dp)
+        )
+
+        Text(
+            text = "최근에 달린 기록이 없어요.",
+            style = WantRunningTypography.body1.copy(color = Gray40, fontWeight = FontWeight(weight = 600))
+        )
+    }
+}
+
+@Composable
+private fun MainHistoryRecentRecordsContent(modifier: Modifier = Modifier) {
+
+}
+
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun MainHistoryRecentRecords() {
-    Text(
-        text = "최근 운동 기록",
-        style = WantRunningTypography.h1.copy(fontWeight = FontWeight(weight = 600)),
-        modifier = Modifier.padding(top = 24.dp, start = 16.dp)
-    )
 
-    LazyColumn(userScrollEnabled = false) {
-        RunningHistory.recentMockingDataList.groupBy { it.date }.forEach { (date, recentHistories) ->
-            stickyHeader {
-                Text(
-                    text = date,
-                    style = WantRunningTypography.body2.copy(color = Gray40, fontWeight = FontWeight(weight = 600)),
-                    modifier = Modifier.padding(top = 24.dp, start = 16.dp)
-                )
-            }
 
-            items(items = recentHistories) { item: RunningHistory ->
-                Row(modifier = Modifier.padding(vertical = 24.dp, horizontal = 16.dp)) {
-                    Image(
-                        painter = if (item.isParty) {
-                            painterResource(id = R.drawable.ic_running_party)
-                        } else {
-                            painterResource(id = R.drawable.ic_running_solo)
-                        },
-                        contentDescription = null
-                    )
-
-                    Spacer(modifier = Modifier.size(size = 10.dp))
-
-                    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.weight(1f)) {
-                        Text(text = "0:53:25", color = Gray90, fontSize = 18.sp, fontWeight = FontWeight.Bold)
-
-                        Spacer(modifier = Modifier.size(size = 12.dp))
-
-                        Text(text = "시간", color = Gray40, fontSize = 13.sp, fontWeight = FontWeight.Bold)
-                    }
-
-                    Spacer(modifier = Modifier.size(size = 4.dp))
-
-                    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.weight(1f)) {
-                        Text(text = "10 km", color = Gray90, fontSize = 18.sp, fontWeight = FontWeight.Bold)
-
-                        Spacer(modifier = Modifier.size(size = 12.dp))
-
-                        Text(text = "거리", color = Gray40, fontSize = 13.sp, fontWeight = FontWeight.Bold)
-                    }
-
-                    Spacer(modifier = Modifier.size(size = 4.dp))
-
-                    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.weight(1f)) {
-                        Text(text = "180 bpm", color = Gray90, fontSize = 18.sp, fontWeight = FontWeight.Bold)
-
-                        Spacer(modifier = Modifier.size(size = 12.dp))
-
-                        Text(text = "심박수", color = Gray40, fontSize = 13.sp, fontWeight = FontWeight.Bold)
-                    }
-                }
-            }
-        }
-    }
+//    LazyColumn(userScrollEnabled = false) {
+//        RunningHistory.recentMockingDataList.groupBy { it.date }.forEach { (date, recentHistories) ->
+//            stickyHeader {
+//                Text(
+//                    text = date,
+//                    style = WantRunningTypography.body2.copy(color = Gray40, fontWeight = FontWeight(weight = 600)),
+//                    modifier = Modifier.padding(top = 24.dp, start = 16.dp)
+//                )
+//            }
+//
+//            items(items = recentHistories) { item: RunningHistory ->
+//                Row(modifier = Modifier.padding(vertical = 24.dp, horizontal = 16.dp)) {
+//                    Image(
+//                        painter = if (item.isParty) {
+//                            painterResource(id = R.drawable.ic_running_party)
+//                        } else {
+//                            painterResource(id = R.drawable.ic_running_solo)
+//                        },
+//                        contentDescription = null
+//                    )
+//
+//                    Spacer(modifier = Modifier.size(size = 10.dp))
+//
+//                    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.weight(1f)) {
+//                        Text(text = "0:53:25", color = Gray90, fontSize = 18.sp, fontWeight = FontWeight.Bold)
+//
+//                        Spacer(modifier = Modifier.size(size = 12.dp))
+//
+//                        Text(text = "시간", color = Gray40, fontSize = 13.sp, fontWeight = FontWeight.Bold)
+//                    }
+//
+//                    Spacer(modifier = Modifier.size(size = 4.dp))
+//
+//                    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.weight(1f)) {
+//                        Text(text = "10 km", color = Gray90, fontSize = 18.sp, fontWeight = FontWeight.Bold)
+//
+//                        Spacer(modifier = Modifier.size(size = 12.dp))
+//
+//                        Text(text = "거리", color = Gray40, fontSize = 13.sp, fontWeight = FontWeight.Bold)
+//                    }
+//
+//                    Spacer(modifier = Modifier.size(size = 4.dp))
+//
+//                    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.weight(1f)) {
+//                        Text(text = "180 bpm", color = Gray90, fontSize = 18.sp, fontWeight = FontWeight.Bold)
+//
+//                        Spacer(modifier = Modifier.size(size = 12.dp))
+//
+//                        Text(text = "심박수", color = Gray40, fontSize = 13.sp, fontWeight = FontWeight.Bold)
+//                    }
+//                }
+//            }
+//        }
+//    }
 }
 
 @Preview(showBackground = true, backgroundColor = 0xFFFFFFFF, device = Devices.PIXEL_3_XL, heightDp = 1200)
