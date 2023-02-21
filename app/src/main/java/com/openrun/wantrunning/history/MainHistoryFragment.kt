@@ -36,6 +36,7 @@ import com.openrun.wantrunning.util.DateTimeUtils.format
 import com.openrun.wantrunning.util.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
 class MainHistoryFragment : BaseFragment() {
@@ -72,12 +73,16 @@ private fun MainHistoryScreen() {
                 }
         )
 
-        // padding from top calendar sheet with 30dp
-        LazyColumn(modifier = Modifier.padding(top = topCalendarSheetHeight + 30.dp)) {
+        LazyColumn(modifier = Modifier.padding(top = topCalendarSheetHeight)) {
             // first, setup selected date record
             item {
                 // TODO: selected date
-                MainHistorySelectedDateRecordContent(selectedDate = LocalDate.now(), modifier = Modifier.fillMaxWidth())
+                // padding from top calendar sheet with 30dp
+                MainHistorySelectedDateRecordContent(
+                    selectedDate = LocalDate.now(), modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 30.dp)
+                )
             }
 
             // item for divider
@@ -105,9 +110,34 @@ private fun MainHistoryScreen() {
                 }
             } else {
                 // items for recent records
-                RunningHistory.recentMockingDataList.groupBy { it.date }.forEach { (date, runningHistory) ->
-                    stickyHeader {
+                RunningHistory.recentMockingDataList.groupBy { it.date }.forEach { (date, runningHistories) ->
+                    // header for date
+                    item {
+                        val dateFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd")
+                        val localDate = LocalDate.parse(date, dateFormatter)
+                        val dateString = "${localDate.monthValue}월 " +
+                                "${localDate.dayOfMonth}일 " +
+                                DateTimeUtils.getDayOfWeekForKR(localDate.dayOfWeek)
+                        Text(
+                            text = dateString,
+                            style = WantRunningTypography.body2.copy(color = Gray40),
+                            modifier = Modifier.padding(start = 16.dp, top = 24.dp)
+                        )
+                    }
 
+                    // records
+                    items(items = runningHistories) { item: RunningHistory ->
+                        MainHistoryRecentRecordItem(
+                            runningHistory = item,
+                            modifier = Modifier.padding(horizontal = 16.dp, vertical = 24.dp)
+                        )
+                    }
+
+                    // divider - check last item by date
+                    if (RunningHistory.recentMockingDataList.last().date != date) {
+                        item {
+                            Divider(color = Gray5, modifier = Modifier.padding(horizontal = 16.dp))
+                        }
                     }
                 }
             }
@@ -237,75 +267,53 @@ private fun MainHistoryRecentRecordsEmpty(modifier: Modifier = Modifier) {
 
         Text(
             text = "최근에 달린 기록이 없어요.",
-            style = WantRunningTypography.body1.copy(color = Gray40, fontWeight = FontWeight(weight = 600))
+            style = WantRunningTypography.body1.copy(color = Gray40)
         )
     }
 }
 
 @Composable
-private fun MainHistoryRecentRecordsContent(modifier: Modifier = Modifier) {
+private fun MainHistoryRecentRecordItem(modifier: Modifier = Modifier, runningHistory: RunningHistory) {
+    Row(modifier = modifier) {
+        Image(
+            painter = if (runningHistory.isParty) {
+                painterResource(id = R.drawable.ic_running_party_40)
+            } else {
+                painterResource(id = R.drawable.ic_running_solo_40)
+            },
+            contentDescription = null
+        )
 
-}
+        Spacer(modifier = Modifier.size(size = 10.dp))
 
-@OptIn(ExperimentalFoundationApi::class)
-@Composable
-private fun MainHistoryRecentRecords() {
+        Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.weight(1f)) {
+            Text(text = runningHistory.time, style = WantRunningTypography.h2.copy(color = Gray90))
 
+            Spacer(modifier = Modifier.size(size = 8.dp))
 
-//    LazyColumn(userScrollEnabled = false) {
-//        RunningHistory.recentMockingDataList.groupBy { it.date }.forEach { (date, recentHistories) ->
-//            stickyHeader {
-//                Text(
-//                    text = date,
-//                    style = WantRunningTypography.body2.copy(color = Gray40, fontWeight = FontWeight(weight = 600)),
-//                    modifier = Modifier.padding(top = 24.dp, start = 16.dp)
-//                )
-//            }
-//
-//            items(items = recentHistories) { item: RunningHistory ->
-//                Row(modifier = Modifier.padding(vertical = 24.dp, horizontal = 16.dp)) {
-//                    Image(
-//                        painter = if (item.isParty) {
-//                            painterResource(id = R.drawable.ic_running_party)
-//                        } else {
-//                            painterResource(id = R.drawable.ic_running_solo)
-//                        },
-//                        contentDescription = null
-//                    )
-//
-//                    Spacer(modifier = Modifier.size(size = 10.dp))
-//
-//                    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.weight(1f)) {
-//                        Text(text = "0:53:25", color = Gray90, fontSize = 18.sp, fontWeight = FontWeight.Bold)
-//
-//                        Spacer(modifier = Modifier.size(size = 12.dp))
-//
-//                        Text(text = "시간", color = Gray40, fontSize = 13.sp, fontWeight = FontWeight.Bold)
-//                    }
-//
-//                    Spacer(modifier = Modifier.size(size = 4.dp))
-//
-//                    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.weight(1f)) {
-//                        Text(text = "10 km", color = Gray90, fontSize = 18.sp, fontWeight = FontWeight.Bold)
-//
-//                        Spacer(modifier = Modifier.size(size = 12.dp))
-//
-//                        Text(text = "거리", color = Gray40, fontSize = 13.sp, fontWeight = FontWeight.Bold)
-//                    }
-//
-//                    Spacer(modifier = Modifier.size(size = 4.dp))
-//
-//                    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.weight(1f)) {
-//                        Text(text = "180 bpm", color = Gray90, fontSize = 18.sp, fontWeight = FontWeight.Bold)
-//
-//                        Spacer(modifier = Modifier.size(size = 12.dp))
-//
-//                        Text(text = "심박수", color = Gray40, fontSize = 13.sp, fontWeight = FontWeight.Bold)
-//                    }
-//                }
-//            }
-//        }
-//    }
+            Text(text = "시간", style = WantRunningTypography.body1.copy(color = Gray40))
+        }
+
+        Spacer(modifier = Modifier.size(size = 4.dp))
+
+        Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.weight(1f)) {
+            Text(text = "${runningHistory.distance} km", style = WantRunningTypography.h2.copy(color = Gray90))
+
+            Spacer(modifier = Modifier.size(size = 8.dp))
+
+            Text(text = "거리", style = WantRunningTypography.body1.copy(color = Gray40))
+        }
+
+        Spacer(modifier = Modifier.size(size = 4.dp))
+
+        Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.weight(1f)) {
+            Text(text = "${runningHistory.heartbeat} bpm", style = WantRunningTypography.h2.copy(color = Gray90))
+
+            Spacer(modifier = Modifier.size(size = 8.dp))
+
+            Text(text = "심박수", style = WantRunningTypography.body1.copy(color = Gray40))
+        }
+    }
 }
 
 @Preview(showBackground = true, backgroundColor = 0xFFFFFFFF, device = Devices.PIXEL_3_XL, heightDp = 1200)
