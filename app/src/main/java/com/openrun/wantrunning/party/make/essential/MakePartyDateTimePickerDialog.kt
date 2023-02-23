@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.openrun.wantrunning.ui.*
+import com.openrun.wantrunning.ui.component.BaseButton
 import com.openrun.wantrunning.ui.component.NumberPicker
 import com.openrun.wantrunning.util.DateTimePickerUtils
 import java.time.LocalDate
@@ -114,7 +115,9 @@ private fun MakePartyDateTimePickerDialogContent(
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
 
-        BasicButton(text = "일정 설정 완료", onClick = onCompleteButtonClick, modifier = Modifier.fillMaxWidth())
+        BaseButton(onClick = onCompleteButtonClick, modifier = Modifier.fillMaxWidth()) {
+            Text(text = "일정 설정 완료", style = WantRunningTypography.button)
+        }
     }
 }
 

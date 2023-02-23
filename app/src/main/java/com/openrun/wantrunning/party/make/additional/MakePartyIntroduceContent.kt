@@ -12,8 +12,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.openrun.wantrunning.R
-import com.openrun.wantrunning.base.ui.compose.BoxedTextField
-import com.openrun.wantrunning.ui.TextFieldTitleText
+import com.openrun.wantrunning.ui.component.BoxedTextField
+import com.openrun.wantrunning.ui.component.TextFieldTitleText
 import com.openrun.wantrunning.ui.WantRunningTheme
 
 @Composable

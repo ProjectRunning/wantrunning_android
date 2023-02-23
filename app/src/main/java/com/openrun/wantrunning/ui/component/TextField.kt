@@ -1,4 +1,4 @@
-package com.openrun.wantrunning.base.ui.compose
+package com.openrun.wantrunning.ui.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

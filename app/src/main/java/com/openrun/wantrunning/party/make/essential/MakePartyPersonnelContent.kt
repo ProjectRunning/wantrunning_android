@@ -8,15 +8,16 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.openrun.wantrunning.R
-import com.openrun.wantrunning.ui.BasicIconButton
-import com.openrun.wantrunning.base.ui.compose.BoxedTextField
-import com.openrun.wantrunning.ui.TextFieldTitleText
 import com.openrun.wantrunning.ui.WantRunningTheme
+import com.openrun.wantrunning.ui.component.BaseIconButton
+import com.openrun.wantrunning.ui.component.BoxedTextField
+import com.openrun.wantrunning.ui.component.TextFieldTitleText
 
 @Composable
 fun MakePartyPersonnelContent(
@@ -53,10 +54,10 @@ private fun MakePartyPersonnelTextField(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(space = 8.dp)
     ) {
-        BasicIconButton(
-            iconResId = R.drawable.ic_minus_24,
-            enabled = personnel > 2,
+        BaseIconButton(
             onClick = onMinusButtonClick,
+            icon = painterResource(id = R.drawable.ic_minus_24),
+            enabled = personnel > 2,
             modifier = Modifier.size(size = 48.dp)
         )
 
@@ -68,10 +69,10 @@ private fun MakePartyPersonnelTextField(
             textStyle = MaterialTheme.typography.body2.copy(textAlign = TextAlign.Center)
         )
 
-        BasicIconButton(
-            iconResId = R.drawable.ic_plus_24,
-            enabled = personnel < 10,
+        BaseIconButton(
             onClick = onPlusButtonClick,
+            icon = painterResource(id = R.drawable.ic_plus_24),
+            enabled = personnel < 10,
             modifier = Modifier.size(size = 48.dp)
         )
     }

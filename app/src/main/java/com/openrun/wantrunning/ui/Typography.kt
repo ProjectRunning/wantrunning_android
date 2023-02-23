@@ -4,6 +4,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.openrun.wantrunning.R
 
@@ -33,5 +34,11 @@ val WantRunningTypography = androidx.compose.material.Typography(
     caption = TextStyle(
         color = Gray100,
         fontSize = 10.sp
+    ),
+    button = TextStyle(
+        color = Gray0,
+        fontSize = 16.sp,
+        fontWeight = FontWeight(weight = 700),
+        textAlign = TextAlign.Center
     )
 )

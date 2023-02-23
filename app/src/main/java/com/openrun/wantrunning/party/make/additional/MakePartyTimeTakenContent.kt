@@ -1,21 +1,29 @@
 package com.openrun.wantrunning.party.make.additional
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.openrun.wantrunning.R
-import com.openrun.wantrunning.ui.BasicTextButton
-import com.openrun.wantrunning.base.ui.compose.BoxedTextField
-import com.openrun.wantrunning.ui.TextFieldTitleText
+import com.openrun.wantrunning.ui.Gray5
+import com.openrun.wantrunning.ui.Gray50
 import com.openrun.wantrunning.ui.WantRunningTheme
+import com.openrun.wantrunning.ui.WantRunningTypography
+import com.openrun.wantrunning.ui.component.BaseButton
+import com.openrun.wantrunning.ui.component.BoxedTextField
+import com.openrun.wantrunning.ui.component.TextFieldTitleText
 
 @Composable
 fun MakePartyTimeTakenContent(
@@ -52,10 +60,16 @@ private fun MakePartyTimeTakenTextField(
             textStyle = MaterialTheme.typography.body2.copy(textAlign = TextAlign.Center)
         )
 
-        BasicTextButton(
-            text = stringResource(id = R.string.all_edit),
-            onClick = onTimeTakenEditButtonClick
-        )
+        BaseButton(
+            onClick = onTimeTakenEditButtonClick,
+            border = BorderStroke(width = 2.dp, color = Gray5),
+            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Transparent)
+        ) {
+            Text(
+                text = stringResource(id = R.string.all_edit),
+                style = WantRunningTypography.button.copy(color = Gray50, fontSize = 14.sp)
+            )
+        }
     }
 }
 

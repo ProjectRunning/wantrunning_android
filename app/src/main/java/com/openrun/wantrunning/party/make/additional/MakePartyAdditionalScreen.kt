@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -11,12 +12,13 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.openrun.wantrunning.R
-import com.openrun.wantrunning.ui.BasicButton
+import com.openrun.wantrunning.party.make.RunningLevel
+import com.openrun.wantrunning.party.make.RunningPace
 import com.openrun.wantrunning.ui.Gray20
 import com.openrun.wantrunning.ui.Gray5
 import com.openrun.wantrunning.ui.WantRunningTheme
-import com.openrun.wantrunning.party.make.RunningLevel
-import com.openrun.wantrunning.party.make.RunningPace
+import com.openrun.wantrunning.ui.WantRunningTypography
+import com.openrun.wantrunning.ui.component.BaseButton
 
 @Composable
 fun MakePartyAdditionalScreen(
@@ -76,21 +78,17 @@ private fun MakePartyAdditionalButtonContainer(
     onDoneButtonClick: () -> Unit
 ) {
     Row(modifier = modifier, horizontalArrangement = Arrangement.spacedBy(space = 8.dp)) {
-        BasicButton(
-            text = stringResource(id = R.string.all_skip),
+        BaseButton(
             onClick = onSkipButtonClick,
-            modifier = Modifier.weight(1f),
-            buttonColors = ButtonDefaults.buttonColors(
-                backgroundColor = Gray5,
-                contentColor = Gray20
-            )
-        )
+            colors = ButtonDefaults.buttonColors(backgroundColor = Gray5),
+            modifier = Modifier.weight(weight = 1f)
+        ) {
+            Text(text = stringResource(id = R.string.all_skip), style = WantRunningTypography.button.copy(color = Gray20))
+        }
 
-        BasicButton(
-            text = stringResource(id = R.string.all_done),
-            onClick = onDoneButtonClick,
-            modifier = Modifier.weight(1f)
-        )
+        BaseButton(onClick = onDoneButtonClick, modifier = Modifier.weight(weight = 1f)) {
+            Text(text = stringResource(id = R.string.all_done), style = WantRunningTypography.button)
+        }
     }
 }
 

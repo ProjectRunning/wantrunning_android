@@ -12,16 +12,22 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.fragment.app.viewModels
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -33,10 +39,11 @@ import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
 import com.openrun.wantrunning.BuildConfig
+import com.openrun.wantrunning.R
 import com.openrun.wantrunning.core.model.SocialSigningHost
 import com.openrun.wantrunning.databinding.FragmentSignInBinding
-import com.openrun.wantrunning.ui.BasicButton
-import com.openrun.wantrunning.ui.WantRunningTheme
+import com.openrun.wantrunning.ui.*
+import com.openrun.wantrunning.ui.component.BaseButton
 import com.openrun.wantrunning.util.autoCleared
 import com.openrun.wantrunning.util.base.BaseFragment
 import com.openrun.wantrunning.util.extension.makeToast
@@ -57,8 +64,7 @@ class SignInFragment : BaseFragment() {
         binding.root.setContent {
             SignInScreen(
                 onKakaoSignInButtonClick = this::onKakaoSignInButtonClick,
-                onGoogleSignInButtonClick = this::onGoogleSignInButtonClick,
-                modifier = Modifier.fillMaxSize()
+                onGoogleSignInButtonClick = this::onGoogleSignInButtonClick
             )
         }
         return binding.root
@@ -135,24 +141,72 @@ class SignInFragment : BaseFragment() {
 
 @Composable
 private fun SignInScreen(
-    modifier: Modifier = Modifier,
     onKakaoSignInButtonClick: (context: Context) -> Unit,
     onGoogleSignInButtonClick: (context: Context) -> Unit
 ) {
     val context: Context = LocalContext.current
 
-    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(space = 24.dp)) {
-        BasicButton(
-            text = "카카오 로그인",
-            onClick = { onKakaoSignInButtonClick.invoke(context) },
-            modifier = Modifier.fillMaxWidth()
-        )
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(text = "함께 달리는 즐거움", style = WantRunningTypography.h2.copy(fontSize = 18.sp, color = Gray60))
 
-        BasicButton(
-            text = "구글 로그인",
+        Spacer(modifier = Modifier.size(size = 8.dp))
+
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Image(
+                painter = painterResource(id = R.drawable.ic_lightning_24),
+                contentDescription = null,
+                modifier = Modifier.size(size = 48.dp)
+            )
+
+            Text(text = "워너런", fontSize = 30.sp, fontWeight = FontWeight(weight = 700), color = Primary2)
+        }
+
+        Spacer(modifier = Modifier.size(size = 75.dp))
+
+        BaseButton(
+            onClick = { onKakaoSignInButtonClick.invoke(context) },
+            shape = CircleShape,
+            colors = ButtonDefaults.buttonColors(backgroundColor = ContainerKakao),
+            leadingIcon = painterResource(id = R.drawable.ic_kakao_ci_20),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 28.dp)
+        ) {
+            Text(
+                text = "카카오로 로그인 하기",
+                style = WantRunningTypography.button.copy(
+                    color = LabelKakao,
+                    fontWeight = FontWeight(weight = 500),
+                    fontSize = 14.sp
+                )
+            )
+        }
+
+        Spacer(modifier = Modifier.size(size = 12.dp))
+
+        BaseButton(
             onClick = { onGoogleSignInButtonClick.invoke(context) },
-            modifier = Modifier.fillMaxWidth()
-        )
+            shape = CircleShape,
+            colors = ButtonDefaults.buttonColors(backgroundColor = ContainerGoogle),
+            border = BorderStroke(width = 1.dp, color = Gray10),
+            leadingIcon = painterResource(id = R.drawable.ic_google_ci_20),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 28.dp)
+        ) {
+            Text(
+                text = "구글로 로그인 하기",
+                style = WantRunningTypography.button.copy(
+                    color = LabelGoogle,
+                    fontWeight = FontWeight(weight = 500),
+                    fontSize = 14.sp
+                )
+            )
+        }
     }
 }
 
@@ -160,6 +214,6 @@ private fun SignInScreen(
 @Composable
 private fun SignInScreenPreview() {
     WantRunningTheme {
-        SignInScreen(onKakaoSignInButtonClick = {}, onGoogleSignInButtonClick = {}, modifier = Modifier.fillMaxSize())
+        SignInScreen(onKakaoSignInButtonClick = {}, onGoogleSignInButtonClick = {})
     }
 }

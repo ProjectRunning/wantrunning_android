@@ -14,17 +14,17 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.naver.maps.map.MapFragment
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.openrun.wantrunning.R
-import com.openrun.wantrunning.base.ui.compose.BoxedTextField
 import com.openrun.wantrunning.databinding.FragmentAddressSearchBinding
-import com.openrun.wantrunning.ui.BasicButton
 import com.openrun.wantrunning.ui.WantRunningTheme
+import com.openrun.wantrunning.ui.WantRunningTypography
+import com.openrun.wantrunning.ui.component.BaseButton
+import com.openrun.wantrunning.ui.component.BoxedTextField
 import com.openrun.wantrunning.util.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -73,6 +73,7 @@ class AddressSearchFragment : BaseFragment(), OnMapReadyCallback {
 private fun AddressSearchBottomSheet(modifier: Modifier = Modifier) {
     val address: String by remember { mutableStateOf("서울특별시 마포구 양화로 160 홍대입구역") }
     var detail: String by remember { mutableStateOf("") }
+
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(space = 12.dp)
@@ -86,7 +87,9 @@ private fun AddressSearchBottomSheet(modifier: Modifier = Modifier) {
             hint = "상세 위치를 입력해주세요. (예: 4번 출구 앞)"
         )
 
-        BasicButton(text = "설정 완료", onClick = { /*TODO*/ }, modifier = Modifier.fillMaxWidth())
+        BaseButton(onClick = { /*TODO*/ }, modifier = Modifier.fillMaxWidth()) {
+            Text(text = "설정 완료", style = WantRunningTypography.button)
+        }
     }
 }
 

@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -17,8 +18,9 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.openrun.wantrunning.R
-import com.openrun.wantrunning.ui.BasicButton
 import com.openrun.wantrunning.ui.WantRunningTheme
+import com.openrun.wantrunning.ui.WantRunningTypography
+import com.openrun.wantrunning.ui.component.BaseButton
 import java.time.LocalDateTime
 
 @Composable
@@ -82,14 +84,15 @@ fun MakePartyEssentialScreen(
             )
         }
 
-        BasicButton(
+        BaseButton(
+            onClick = { /*TODO*/ },
+            enabled = nextButtonEnabled,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
-            text = stringResource(id = R.string.all_go_to_next),
-            enabled = nextButtonEnabled,
-            onClick = {}
-        )
+                .padding(all = 16.dp)
+        ) {
+            Text(text = stringResource(id = R.string.all_go_to_next), style = WantRunningTypography.button)
+        }
     }
 
     MakePartyDateTimePickerDialog(

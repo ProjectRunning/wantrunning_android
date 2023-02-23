@@ -1,4 +1,4 @@
-package com.openrun.wantrunning.ui
+package com.openrun.wantrunning.ui.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -14,6 +14,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.openrun.wantrunning.R
+import com.openrun.wantrunning.ui.ActiveRed
+import com.openrun.wantrunning.ui.WantRunningTheme
 
 @Composable
 fun TextFieldTitleText(
